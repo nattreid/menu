@@ -1,0 +1,21 @@
+{
+    "name": "nattreid/menu",
+    "description": "Menu for Nette Framework",
+    "license": ["Unlicense"],
+    "authors": [
+        {
+            "name": "Attreid",
+            "email": "attreid@gmail.com"
+        }
+    ],
+    "main": [
+        "./client-side/menu.js"
+    ],
+    "ignore": [
+        "src",
+        "*.json"
+    ],
+    "dependencies": {
+        "jquery": "~1.12"
+    }
+}
