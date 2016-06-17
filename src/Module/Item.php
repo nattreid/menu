@@ -55,7 +55,7 @@ class Item {
     public function check(Menu $menu, $presenter) {
         $this->allowed = $menu->isAllowed($this->name);
         if ($this->allowed) {
-            $this->isCurrent = $presenter->isModuleCurrent($this->module);
+            $this->isCurrent = $this->isModuleCurrent($presenter, $this->module);
             if ($this->isCurrent) {
                 $menu->setCurrentModule($this->name, $this->link);
             }
