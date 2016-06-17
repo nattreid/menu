@@ -2,6 +2,8 @@
 
 namespace NAttreid\Menu\Module;
 
+use Nette\Application\UI\Presenter;
+
 /**
  * Polozka menu modulu
  * 
@@ -48,7 +50,7 @@ class Item {
     /**
      * Kontrola
      * @param Menu $menu
-     * @param \App\Presenters\Presenter $presenter
+     * @param Presenter $presenter
      */
     public function check(Menu $menu, $presenter) {
         $this->allowed = $menu->isAllowed($this->name);
@@ -58,6 +60,26 @@ class Item {
                 $menu->setCurrentModule($this->name, $this->link);
             }
         }
+    }
+
+    /**
+     * Je modul aktualne zobrazen?
+     * @param Presenter $presenter
+     * @param string $module
+     * @return boolean
+     */
+    private function isModuleCurrent($presenter, $module) {
+        $name = $presenter->name;
+        $module = trim((string) $module);
+
+        $pos = strrpos($name, ':');
+        $current = $pos !== FALSE ? substr($name, 0, $pos + 1) : NULL;
+
+        if ($current === NULL) {
+            return $module === '';
+        }
+
+        return \Nette\Utils\Strings::startsWith($current, $module . ':');
     }
 
 }
