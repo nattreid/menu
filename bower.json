@@ -14,5 +14,8 @@
     ],
     "dependencies": {
         "jquery": "~1.12"
+    },
+    "sources": {
+        "jquery": "bower_components/jquery/dist/jquery.min.js"
     }
 }
