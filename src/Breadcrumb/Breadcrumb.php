@@ -10,7 +10,7 @@ use Nette\Application\LinkGenerator,
  * 
  * @author Attreid <attreid@gmail.com>
  */
-class Breadcrumb extends \App\Core\BaseControl {
+class Breadcrumb extends \Nette\Application\UI\Control {
 
     /** @var LinkGenerator */
     private $linkGenerator;
