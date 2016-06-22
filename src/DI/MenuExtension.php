@@ -9,12 +9,13 @@ namespace NAttreid\Menu\DI;
  */
 class MenuExtension extends \Nette\DI\CompilerExtension {
 
-    private $default = [
+    /** @var array */
+    private $defaults = [
         'items' => []
     ];
 
     public function loadConfiguration() {
-        $config = $this->getConfig($this->default);
+        $config = $this->validateConfig($this->defaults, $this->config);
 
         $builder = $this->getContainerBuilder();
 
