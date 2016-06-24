@@ -23,20 +23,17 @@ class MenuExtension extends \Nette\DI\CompilerExtension {
                 ->setImplement('\NAttreid\Menu\Module\IMenuFactory')
                 ->setFactory('\NAttreid\Menu\Module\Menu')
                 ->setArguments(['%namespace%'])
-                ->setAutowired(TRUE)
                 ->addSetup('setMenu', [$config['items']]);
 
         $builder->addDefinition($this->prefix('menu'))
                 ->setImplement('\NAttreid\Menu\Menu\IMenuFactory')
                 ->setFactory('\NAttreid\Menu\Menu\Menu')
                 ->setArguments(['%namespace%'])
-                ->setAutowired(TRUE)
                 ->addSetup('setMenu', [$config['items']]);
 
         $builder->addDefinition($this->prefix('breadcrumb'))
                 ->setImplement('\NAttreid\Menu\Breadcrumb\IBreadcrumb')
-                ->setFactory('\NAttreid\Menu\Breadcrumb\Breadcrumb')
-                ->setAutowired(TRUE);
+                ->setFactory('\NAttreid\Menu\Breadcrumb\Breadcrumb');
     }
 
 }
