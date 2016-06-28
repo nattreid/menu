@@ -6,7 +6,7 @@ use Nette\Utils\Strings,
     App\Core\User,
     NAttreid\Menu\Breadcrumb\IBreadcrumb,
     Nette\Caching\IStorage,
-    Kdyby\Translation\Translator;
+    Nette\Localization\ITranslator;
 
 /**
  * Menu modulu
@@ -21,7 +21,7 @@ class Menu extends \NAttreid\Menu\BaseMenu {
     /** @var Item */
     private $items = [];
 
-    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, Translator $translator, \NAttreid\Menu\Menu\IMenuFactory $menuFactory) {
+    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, ITranslator $translator, \NAttreid\Menu\Menu\IMenuFactory $menuFactory) {
         parent::__construct($namespace, $user, $breadcrumbFactory, $cacheStorage, $translator);
         $this->menuFactory = $menuFactory;
     }

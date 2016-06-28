@@ -7,7 +7,7 @@ use Nette\Http\Session,
     Nette\Security\User,
     NAttreid\Menu\Breadcrumb\IBreadcrumb,
     Nette\Caching\IStorage,
-    Kdyby\Translation\Translator;
+    Nette\Localization\ITranslator;
 
 /**
  * Menu
@@ -25,7 +25,7 @@ class Menu extends \NAttreid\Menu\BaseMenu {
     /** @var BaseMenu */
     private $parent;
 
-    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, Translator $translator, \NAttreid\Menu\Module\Menu $parent, Session $session) {
+    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, ITranslator $translator, \NAttreid\Menu\Module\Menu $parent, Session $session) {
         parent::__construct($namespace, $user, $breadcrumbFactory, $cacheStorage, $translator);
         $this->parent = $parent;
         $this->session = $session;

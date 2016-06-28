@@ -5,7 +5,7 @@ namespace NAttreid\Menu;
 use Nette\Security\User,
     Nette\Caching\Cache,
     NAttreid\Menu\Breadcrumb\IBreadcrumb,
-    Kdyby\Translation\Translator;
+    Nette\Localization\ITranslator;
 
 /**
  * Zakladni trida pro menu
@@ -23,7 +23,7 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
     /** @var IBreadcrumb */
     private $breadcrumbFactory;
 
-    /** @var Translator */
+    /** @var ITranslator */
     private $translator;
 
     /** @var Cache */
@@ -41,7 +41,7 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
     /** @var boolean */
     private $view = TRUE;
 
-    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, \Nette\Caching\IStorage $cacheStorage, Translator $translator) {
+    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, \Nette\Caching\IStorage $cacheStorage, ITranslator $translator) {
         $this->namespace = $namespace;
         $this->user = $user;
         $this->breadcrumbFactory = $breadcrumbFactory;
