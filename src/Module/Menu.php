@@ -3,7 +3,7 @@
 namespace NAttreid\Menu\Module;
 
 use Nette\Utils\Strings,
-    App\Core\User,
+    Nette\Security\User,
     NAttreid\Menu\Breadcrumb\IBreadcrumb,
     Nette\Caching\IStorage,
     Nette\Localization\ITranslator;
