@@ -2,6 +2,13 @@
 
 namespace NAttreid\Menu\DI;
 
+use NAttreid\Menu\Module\IMenuFactory as IModuleMenuFactory,
+    NAttreid\Menu\Module\Menu as ModuleMenu,
+    NAttreid\Menu\Menu\IMenuFactory,
+    NAttreid\Menu\Menu\Menu,
+    NAttreid\Menu\Breadcrumb\IBreadcrumb,
+    NAttreid\Menu\Breadcrumb\Breadcrumb;
+
 /**
  * Nastaveni Menu
  * 
@@ -20,20 +27,20 @@ class MenuExtension extends \Nette\DI\CompilerExtension {
         $builder = $this->getContainerBuilder();
 
         $builder->addDefinition($this->prefix('moduleMenu'))
-                ->setImplement('NAttreid\Menu\Module\IMenuFactory')
-                ->setFactory('NAttreid\Menu\Module\Menu')
+                ->setImplement(IModuleMenuFactory::class)
+                ->setFactory(ModuleMenu::class)
                 ->setArguments(['%namespace%'])
                 ->addSetup('setMenu', [$config['items']]);
 
         $builder->addDefinition($this->prefix('menu'))
-                ->setImplement('NAttreid\Menu\Menu\IMenuFactory')
-                ->setFactory('NAttreid\Menu\Menu\Menu')
+                ->setImplement(IMenuFactory::class)
+                ->setFactory(Menu::class)
                 ->setArguments(['%namespace%'])
                 ->addSetup('setMenu', [$config['items']]);
 
         $builder->addDefinition($this->prefix('breadcrumb'))
-                ->setImplement('NAttreid\Menu\Breadcrumb\IBreadcrumb')
-                ->setFactory('NAttreid\Menu\Breadcrumb\Breadcrumb');
+                ->setImplement(IBreadcrumb::class)
+                ->setFactory(Breadcrumb::class);
     }
 
 }
