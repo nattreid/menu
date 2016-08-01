@@ -41,7 +41,7 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
     /** @var boolean */
     private $view = TRUE;
 
-    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, \Nette\Caching\IStorage $cacheStorage, ITranslator $translator) {
+    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, \Nette\Caching\IStorage $cacheStorage, ITranslator $translator = NULL) {
         $this->namespace = $namespace;
         $this->user = $user;
         $this->breadcrumbFactory = $breadcrumbFactory;
@@ -88,7 +88,7 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
     public function setCurrentPresenter($name, $link) {
         $this->presenterLink = new \stdClass;
         $this->presenterLink->link = $link;
-        $this->presenterLink->name = $this->translator->translate('menu.' . $name);
+        $this->presenterLink->name = $this->translator ? $this->translator->translate('menu.' . $name) : $name;
     }
 
     /**
@@ -99,7 +99,7 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
     public function setCurrentModule($name, $link) {
         $this->moduleLink = new \stdClass;
         $this->moduleLink->link = $link;
-        $this->moduleLink->name = $this->translator->translate('menu.' . $name . '.title');
+        $this->moduleLink->name = $this->translator ? $this->translator->translate('menu.' . $name . '.title') : $name;
     }
 
     /**

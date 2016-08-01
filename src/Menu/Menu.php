@@ -25,7 +25,7 @@ class Menu extends \NAttreid\Menu\BaseMenu {
     /** @var BaseMenu */
     private $parent;
 
-    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, ITranslator $translator, \NAttreid\Menu\Module\Menu $parent, Session $session) {
+    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, \NAttreid\Menu\Module\Menu $parent, Session $session, ITranslator $translator = NULL) {
         parent::__construct($namespace, $user, $breadcrumbFactory, $cacheStorage, $translator);
         $this->parent = $parent;
         $this->session = $session;

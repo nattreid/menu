@@ -21,7 +21,7 @@ class Menu extends \NAttreid\Menu\BaseMenu {
     /** @var Item */
     private $items = [];
 
-    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, ITranslator $translator, \NAttreid\Menu\Menu\IMenuFactory $menuFactory) {
+    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, \NAttreid\Menu\Menu\IMenuFactory $menuFactory, ITranslator $translator = NULL) {
         parent::__construct($namespace, $user, $breadcrumbFactory, $cacheStorage, $translator);
         $this->menuFactory = $menuFactory;
     }
