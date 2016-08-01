@@ -6,8 +6,7 @@ use Nette\Http\Session,
     Nette\Utils\Strings,
     Nette\Security\User,
     NAttreid\Menu\Breadcrumb\IBreadcrumb,
-    Nette\Caching\IStorage,
-    Nette\Localization\ITranslator;
+    Nette\Caching\IStorage;
 
 /**
  * Menu
@@ -25,8 +24,8 @@ class Menu extends \NAttreid\Menu\BaseMenu {
     /** @var BaseMenu */
     private $parent;
 
-    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, \NAttreid\Menu\Module\Menu $parent, Session $session, ITranslator $translator = NULL) {
-        parent::__construct($namespace, $user, $breadcrumbFactory, $cacheStorage, $translator);
+    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, \NAttreid\Menu\Module\Menu $parent, Session $session) {
+        parent::__construct($namespace, $user, $breadcrumbFactory, $cacheStorage);
         $this->parent = $parent;
         $this->session = $session;
     }

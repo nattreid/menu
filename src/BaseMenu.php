@@ -41,11 +41,18 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
     /** @var boolean */
     private $view = TRUE;
 
-    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, \Nette\Caching\IStorage $cacheStorage, ITranslator $translator = NULL) {
+    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, \Nette\Caching\IStorage $cacheStorage) {
         $this->namespace = $namespace;
         $this->user = $user;
         $this->breadcrumbFactory = $breadcrumbFactory;
         $this->cache = new Cache($cacheStorage, 'component/menu');
+    }
+
+    /**
+     * Nastavi translator
+     * @param ITranslator $translator
+     */
+    public function setTranslator(ITranslator $translator) {
         $this->translator = $translator;
     }
 
@@ -109,7 +116,7 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
      */
     public function setBaseUrl($name, $link) {
         $this->baseUrl = new \stdClass;
-        $this->baseUrl->name = $name;
+        $this->baseUrl->name = $this->translator !== NULL ? $this->translator->translate($name) : $name;
         $this->baseUrl->link = $link;
     }
 

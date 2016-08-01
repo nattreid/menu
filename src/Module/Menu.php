@@ -5,8 +5,7 @@ namespace NAttreid\Menu\Module;
 use Nette\Utils\Strings,
     Nette\Security\User,
     NAttreid\Menu\Breadcrumb\IBreadcrumb,
-    Nette\Caching\IStorage,
-    Nette\Localization\ITranslator;
+    Nette\Caching\IStorage;
 
 /**
  * Menu modulu
@@ -21,8 +20,8 @@ class Menu extends \NAttreid\Menu\BaseMenu {
     /** @var Item */
     private $items = [];
 
-    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, \NAttreid\Menu\Menu\IMenuFactory $menuFactory, ITranslator $translator = NULL) {
-        parent::__construct($namespace, $user, $breadcrumbFactory, $cacheStorage, $translator);
+    public function __construct($namespace, User $user, IBreadcrumb $breadcrumbFactory, IStorage $cacheStorage, \NAttreid\Menu\Menu\IMenuFactory $menuFactory) {
+        parent::__construct($namespace, $user, $breadcrumbFactory, $cacheStorage);
         $this->menuFactory = $menuFactory;
     }
 

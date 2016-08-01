@@ -3,7 +3,8 @@
 namespace NAttreid\Menu\Breadcrumb;
 
 use Nette\Application\LinkGenerator,
-    Nette\Utils\Strings;
+    Nette\Utils\Strings,
+    Nette\Localization\ITranslator;
 
 /**
  * Drobeckova navigace
@@ -33,6 +34,9 @@ class Breadcrumb extends \Nette\Application\UI\Control {
      */
     private $delimiter;
 
+    /** @var ITranslator */
+    private $translator;
+
     /**
      * Zobrazi pokud obsahuje pouze jeden link
      * @var boolean
@@ -44,11 +48,19 @@ class Breadcrumb extends \Nette\Application\UI\Control {
     }
 
     /**
+     * Nastavi translator
+     * @param ITranslator $translator
+     */
+    public function setTranslator(ITranslator $translator) {
+        $this->translator = $translator;
+    }
+
+    /**
      * Nastavi text pred navigaci
      * @param string $title
      */
     public function setTitle($title) {
-        $this->title = $title;
+        $this->title = $this->translator !== NULL ? $this->translator->translate($title) : $title;
     }
 
     /**
@@ -56,7 +68,7 @@ class Breadcrumb extends \Nette\Application\UI\Control {
      * @param string $delimiter
      */
     public function setDelimiter($delimiter) {
-        $this->delimiter = $delimiter;
+        $this->delimiter = $this->translator !== NULL ? $this->translator->translate($delimiter) : $delimiter;
     }
 
     /**
@@ -76,7 +88,7 @@ class Breadcrumb extends \Nette\Application\UI\Control {
         $plink = $this->checkLink($link, $args);
         if ($plink !== FALSE) {
             $obj = new \stdClass;
-            $obj->name = $name;
+            $obj->name = $this->translator !== NULL ? $this->translator->translate($name) : $name;
             $obj->link = $plink;
             $this->links[] = $obj;
         }
