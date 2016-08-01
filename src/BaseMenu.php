@@ -88,7 +88,7 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
     public function setCurrentPresenter($name, $link) {
         $this->presenterLink = new \stdClass;
         $this->presenterLink->link = $link;
-        $this->presenterLink->name = $this->translator ? $this->translator->translate('menu.' . $name) : $name;
+        $this->presenterLink->name = $this->translator !== NULL ? $this->translator->translate('menu.' . $name) : $name;
     }
 
     /**
@@ -99,7 +99,7 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
     public function setCurrentModule($name, $link) {
         $this->moduleLink = new \stdClass;
         $this->moduleLink->link = $link;
-        $this->moduleLink->name = $this->translator ? $this->translator->translate('menu.' . $name . '.title') : $name;
+        $this->moduleLink->name = $this->translator !== NULL ? $this->translator->translate('menu.' . $name . '.title') : $name;
     }
 
     /**
