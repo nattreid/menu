@@ -24,7 +24,7 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
     private $breadcrumbFactory;
 
     /** @var ITranslator */
-    private $translator;
+    protected $translator;
 
     /** @var Cache */
     private $cache;
@@ -134,6 +134,9 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
         }
         if ($this->presenterLink) {
             $breadcrumb->addLink($this->presenterLink->name, $this->presenterLink->link);
+        }
+        if ($this->translator !== NULL) {
+            $breadcrumb->setTranslator($this->translator);
         }
         return $breadcrumb;
     }

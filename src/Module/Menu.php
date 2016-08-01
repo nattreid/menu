@@ -96,6 +96,9 @@ class Menu extends \NAttreid\Menu\BaseMenu {
      */
     public function createMenu($namespace) {
         $menu = $this->menuFactory->create($this->namespace . '.' . $namespace, $this);
+        if ($this->translator !== NULL) {
+            $menu->setTranslator($this->translator);
+        }
         return $menu;
     }
 
