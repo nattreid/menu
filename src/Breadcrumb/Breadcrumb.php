@@ -68,7 +68,7 @@ class Breadcrumb extends \Nette\Application\UI\Control {
      * @param string $delimiter
      */
     public function setDelimiter($delimiter) {
-        $this->delimiter = $this->translator !== NULL ? $this->translator->translate($delimiter) : $delimiter;
+        $this->delimiter = $delimiter;
     }
 
     /**
