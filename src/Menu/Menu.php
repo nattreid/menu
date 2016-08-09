@@ -30,8 +30,12 @@ class Menu extends \NAttreid\Menu\BaseMenu {
         $this->session = $session;
     }
 
+    /**
+     * Nastavi menu
+     * @param array $menu
+     */
     public function setMenu($menu) {
-        $this->groups = $this->getItems($this->namespace, function() use($menu) {
+        $this->groups = $this->loadCache($this->namespace, function() use($menu) {
             $parents = explode('.', $this->namespace);
             $gArr = $menu;
             $link = ':';

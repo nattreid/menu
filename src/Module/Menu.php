@@ -25,8 +25,12 @@ class Menu extends \NAttreid\Menu\BaseMenu {
         $this->menuFactory = $menuFactory;
     }
 
+    /**
+     * Nastavi menu
+     * @param array $menu
+     */
     public function setMenu($menu) {
-        $this->items = $this->getItems($this->namespace, function() use($menu) {
+        $this->items = $this->loadCache($this->namespace, function() use($menu) {
             $items = [];
             $parentModule = Strings::firstUpper($this->namespace);
             foreach ($menu[$this->namespace] as $name => $item) {

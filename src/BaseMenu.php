@@ -70,10 +70,16 @@ abstract class BaseMenu extends \Nette\Application\UI\Control {
         $this->view = TRUE;
     }
 
-    protected function getItems($key, $callback) {
+    /**
+     * Vrati vysledek z cache
+     * @param string $key
+     * @param mixed $data
+     * @return mixed
+     */
+    protected function loadCache($key, $data) {
         $result = $this->cache->load($key);
         if ($result === NULL) {
-            $result = $this->cache->save($key, $callback);
+            $result = $this->cache->save($key, $data);
         }
         return $result;
     }
