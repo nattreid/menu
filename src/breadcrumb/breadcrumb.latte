@@ -1,3 +1,4 @@
+{dump $view}
 <div n:if="$view" n:class="isset($args[class]) ? $args[class]"{ifset $args[id]} id="{$args[id]}"{/ifset}>
     <ul>
         {ifset $title}
@@ -6,7 +7,13 @@
             {foreach $links as $link}
             <li>
                 <span n:if="!$iterator->isFirst()" n:ifset="$delimiter">{$delimiter}</span>
-                <a {if $link->link !== NULL}href="{$link->link}"{else}href="{plink this}"{/if}>{$link->name}</a>
+                <a 
+                    {if $link->link !== NULL}
+                        href="{plink $link->link, (expand) $link->arguments}"
+                    {else}
+                        href="{plink this}"
+                    {/if}>{$link->name}
+                </a>
             </li>
         {/foreach}
     </ul>

@@ -12,10 +12,10 @@
             var parent = $(this).closest('dl');
 
             parent.children('dd').slideToggle(time, function () {
-                $(this).toggleClass('itemHidden');
+                $(this).toggleClass('menu-group-hidden');
             });
 
-            parent.children('dt').toggleClass('itemHidden');
+            parent.children('dt').toggleClass('menu-group-hidden');
         });
     });
 

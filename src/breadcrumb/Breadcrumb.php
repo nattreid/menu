@@ -1,9 +1,8 @@
 <?php
 
-namespace NAttreid\Menu\Breadcrumb;
+namespace NAttreid\Menu;
 
-use Nette\Application\LinkGenerator,
-    Nette\Utils\Strings,
+use     Nette\Utils\Strings,
     Nette\Localization\ITranslator;
 
 /**
@@ -13,8 +12,7 @@ use Nette\Application\LinkGenerator,
  */
 class Breadcrumb extends \Nette\Application\UI\Control {
 
-    /** @var LinkGenerator */
-    private $linkGenerator;
+
 
     /**
      * Text pred navigaci
@@ -32,7 +30,7 @@ class Breadcrumb extends \Nette\Application\UI\Control {
      * Oddelovac
      * @var string
      */
-    private $delimiter;
+    private $delimiter = '»';
 
     /** @var ITranslator */
     private $translator;
@@ -43,9 +41,7 @@ class Breadcrumb extends \Nette\Application\UI\Control {
      */
     private $view = FALSE;
 
-    public function __construct(LinkGenerator $linkGenerator) {
-        $this->linkGenerator = $linkGenerator;
-    }
+
 
     /**
      * Nastavi translator
@@ -82,44 +78,14 @@ class Breadcrumb extends \Nette\Application\UI\Control {
      * Prida polozku do navigace
      * @param string $name
      * @param string $link
-     * @param array|FALSE $args pokud je FALSE, link se nepreklada
+     * @param array $arguments
      */
-    public function addLink($name, $link = NULL, $args = []) {
-        $plink = $this->checkLink($link, $args);
-        if ($plink !== FALSE) {
+    public function addLink($name, $link = NULL, $arguments = []) {
             $obj = new \stdClass;
             $obj->name = $this->translator !== NULL ? $this->translator->translate($name) : $name;
-            $obj->link = $plink;
+            $obj->link = $link;
+            $obj->arguments = $arguments;
             $this->links[] = $obj;
-        }
-    }
-
-    /**
-     * Existuje link v navigaci
-     * @param string $link
-     * @param string $args
-     * @return string
-     */
-    private function checkLink($link, $args) {
-        if ($link === NULL) {
-            return NULL;
-        }
-        $link = Strings::replace($link, '/^:/');
-        if ($args !== FALSE) {
-            if (!empty($args)) {
-                $plink = $this->linkGenerator->link($link, $args);
-            } else {
-                $plink = $this->linkGenerator->link($link);
-            }
-        } else {
-            $plink = $link;
-        }
-        foreach ($this->links as $value) {
-            if ($value->link == $plink) {
-                return FALSE;
-            }
-        }
-        return $plink;
     }
 
     public function render($args = NULL) {
@@ -133,12 +99,4 @@ class Breadcrumb extends \Nette\Application\UI\Control {
         $template->render();
     }
 
-}
-
-interface IBreadcrumb {
-
-    /**
-     * @return Breadcrumb
-     */
-    public function create();
 }

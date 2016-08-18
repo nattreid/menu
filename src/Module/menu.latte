@@ -1,7 +1,0 @@
-<ul n:if="$view" n:class="isset($args[class]) ? $args[class]"{ifset $args[id]} id="{$args[id]}"{/ifset}>
-    <li 
-        n:foreach="$items as $item" 
-        n:if="$item->allowed">
-        <a n:class="$item->isCurrent ? active" href="{plink $item->link}">{_'menu.'.$item->name.'.title'}</a>
-    </li>
-</ul>

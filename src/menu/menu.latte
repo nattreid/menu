@@ -1,0 +1,35 @@
+<ul n:if="$view" n:class="menu-container, isset($args[class]) ? $args[class]"{ifset $args[id]} id="{$args[id]}"{/ifset}>
+    <li 
+        n:foreach="$items as $item" 
+        n:if="$item->allowed">
+        {include item, item => $item}
+    </li>
+</ul>
+
+{define item}
+{if $item->allowed}
+    {if $item->group}
+        <dl>
+            <dt n:class="$item->hidden ? 'menu-group-hidden'"><a class="ajax" data-ajax-off="history" n:href="scrollGroup $item->name">{$item->name}</a></dt>
+            <dd n:if="$child->allowed" n:foreach="$item->items as $child" n:class="$item->hidden ? 'menu-group-hidden'">
+                {include item, item => $child}
+            </dd>
+        </dl>
+    {else}
+        <a
+            n:class="$item->current ? active, $item->type"
+            href="{plink $item->link, (expand) $item->arguments}"
+            {if $item->toBlank}target="_blank"{/if}>
+            {$item->name}
+            <span n:if="!empty($item->count)">({$item->count})</span>
+        </a>
+        {if $item->current}
+            <div class="menu-current">
+                {foreach $item->items as $child}
+                    {include item, item => $child}
+                {/foreach}
+            </div>
+        {/if}
+    {/if}
+{/if}
+{/define}
