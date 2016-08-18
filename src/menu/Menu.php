@@ -53,13 +53,25 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
      */
     public function setMenu(array $menu) {
         $this->items = [];
-        foreach ($menu[$this->namespace] as $name => $item) {
+        $this->addMenu($menu[$this->namespace]);
+    }
+
+    /**
+     * Prida do menu polozky
+     * @param array $menu
+     * @param string $position
+     */
+    public function addMenu(array $menu, $position = NULL) {
+        foreach ($menu as $name => $item) {
             if (!isset($item ['link'])) {
                 throw new \Nette\InvalidArgumentException('First level of Menu must have set link');
             } else {
-                $link = $this->addLink($name, $item['link']);
+                $link = $this->addLink($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : [], $position);
+                if (!empty($item['toBlank'])) {
+                    $link->toBlank();
+                }
 
-                unset($item['link']);
+                unset($item['link'], $item['arguments'], $item['toBlank']);
                 $this->addMenuItems($link, $item);
             }
         }
@@ -73,8 +85,11 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
     private function addMenuItems(Item $parent, array $menu) {
         foreach ($menu as $name => $item) {
             if (isset($item ['link'])) {
-                $obj = $parent->addLink($name, $item ['link']);
-                unset($item ['link']);
+                $obj = $parent->addLink($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : []);
+                if (!empty($item['toBlank'])) {
+                    $obj->toBlank();
+                }
+                unset($item['link'], $item['arguments'], $item['toBlank']);
             } else {
                 $obj = $parent->addGroup($name);
             }
@@ -95,11 +110,13 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
     /**
      * Prida link
      * @param string $name
+     * @param string $link
+     * @param array $arguments
      * @param int $position
-     * return Link
+     * @return Link
      */
-    public function addLink($name, $link, $position = NULL) {
-        $item = $this->addItem(new Link($name, $link), $position);
+    public function addLink($name, $link, array $arguments = [], $position = NULL) {
+        $item = $this->addItem(new Link($name, $link, $arguments), $position);
         return $this->addLinkAddress($item);
     }
 

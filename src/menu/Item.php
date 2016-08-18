@@ -71,11 +71,13 @@ abstract class Item implements IParent {
     /**
      * Prida link
      * @param string $name
+     * @param string $link
+     * @param array $arguments
      * @param int $position
      * @return Link
      */
-    public function addLink($name, $link, $position = NULL) {
-        $item = $this->addItem(new Link($name, $link), $position);
+    public function addLink($name, $link, array $arguments = [], $position = NULL) {
+        $item = $this->addItem(new Link($name, $link, $arguments), $position);
         return $this->getMenu()->addLinkAddress($item);
     }
 
