@@ -22,7 +22,6 @@ class MenuExtension {
         $builder->addDefinition($this->prefix('menu'))
                 ->setImplement(IMenuFactory::class)
                 ->setFactory(Menu::class)
-                ->setArguments(['%namespace%'])
                 ->addSetup('setMenu', [$config['items']]);
     }
 

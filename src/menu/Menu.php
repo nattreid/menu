@@ -16,9 +16,6 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
 
     use ItemTrait;
 
-    /** @var string */
-    private $namespace;
-
     /** @var User */
     private $user;
 
@@ -40,8 +37,7 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
     /** @var Breadcrumb */
     private $breadcrumb;
 
-    public function __construct($namespace, User $user, Session $session) {
-        $this->namespace = $namespace;
+    public function __construct(User $user, Session $session) {
         $this->user = $user;
         $this->session = $session;
     }
@@ -53,7 +49,7 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
      */
     public function setMenu(array $menu) {
         $this->items = [];
-        $this->addMenu($menu[$this->namespace]);
+        $this->addMenu($menu);
     }
 
     /**
@@ -62,17 +58,22 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
      * @param string $position
      */
     public function addMenu(array $menu, $position = NULL) {
-        foreach ($menu as $name => $item) {
-            if (!isset($item ['link'])) {
-                throw new \Nette\InvalidArgumentException('First level of Menu must have set link');
-            } else {
-                $link = $this->addLink($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : [], $position);
-                if (!empty($item['toBlank'])) {
-                    $link->toBlank();
-                }
+        foreach ($menu as $namespace => $modules) {
+            foreach ($modules as $name => $item) {
+                if (!isset($item['link'])) {
+                    throw new \Nette\InvalidArgumentException('First level of Menu must have set link');
+                } else {
+                    $link = $this->addItem(new Link($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : []), $position);
+                    $link->setNamespace($namespace);
+                    $this->addLinkAddress($link);
 
-                unset($item['link'], $item['arguments'], $item['toBlank']);
-                $this->addMenuItems($link, $item);
+                    if (!empty($item['toBlank'])) {
+                        $link->toBlank();
+                    }
+
+                    unset($item['link'], $item['arguments'], $item['toBlank']);
+                    $this->addMenuItems($link, $item);
+                }
             }
         }
     }
@@ -128,7 +129,7 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
      */
     public function addLinkAddress(Link $link) {
         if (isset($this->links[$link->link])) {
-//            throw new \Nette\InvalidStateException("Link '{$link->link}' already exists in Menu.");
+            throw new \Nette\InvalidStateException("Link '{$link->link}' already exists in Menu.");
         }
         return $this->links[$link->link] = $link;
     }
@@ -147,13 +148,6 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
      */
     public function getTranslator() {
         return $this->translator;
-    }
-
-    /**
-     * {@inheritdoc }
-     */
-    public function getNamespace() {
-        return $this->namespace;
     }
 
     /**

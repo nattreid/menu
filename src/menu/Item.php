@@ -33,8 +33,19 @@ abstract class Item implements IParent {
     /** @var boolean */
     private $current = FALSE;
 
+    /** @var string  */
+    private $namespace;
+
     public function __construct($name) {
         $this->name = $name;
+    }
+
+    /**
+     * Nastavi namespace
+     * @param string $namespace
+     */
+    public function setNamespace($namespace) {
+        $this->namespace = $namespace;
     }
 
     /**
@@ -42,7 +53,13 @@ abstract class Item implements IParent {
      * @return string
      */
     public function getNamespace() {
-        return $this->parent->getNamespace() . '.' . $this->name;
+        $namespace = ($this->namespace !== NULL ? $this->namespace . '.' : '') . $this->name;
+
+        $parent = $this->parent;
+        if ($parent instanceof Item) {
+            $namespace = $this->parent->getNamespace() . '.' . $namespace;
+        }
+        return $namespace;
     }
 
     /**
@@ -115,10 +132,13 @@ abstract class Item implements IParent {
         if ($this instanceof Link) {
             $link = Strings::firstUpper($this->name) . ':' . $link;
         }
+        if ($this->namespace !== NULL) {
+            $link = Strings::firstUpper($this->namespace) . ':' . $link;
+        }
 
         $parent = $this->parent;
         if ($parent instanceof Menu) {
-            return ':' . Strings::firstUpper($parent->getNamespace()) . ':' . $link;
+            return ':' . $link;
         } elseif ($parent instanceof Item) {
             return $parent->createLink($link);
         }

@@ -8,11 +8,11 @@ extensions:
 
 menu:
     items:
-        namespace:
+        module:                                         # hlavni modul (front, crm)
             data:                                       # namespace modulu
                 link: 'Homepage:'                       # link na HP modulu
                 group:                                  # skupina
-                    page:                               # konkretni presenter
+                    page:                               # presenter
                         link: 'action'                  # link akci presenteru
                         arguments: ['name': 'value']    # argumenty
                         toBlank: TRUE                   # otevre do noveho okna
@@ -31,7 +31,7 @@ services:
 public $menuFactory;
 
 function createComponentMenu() {
-    $menu = $this->menuFactory->create('namespace');
+    $menu = $this->menuFactory->create();
 
     $link = $menu->addLink('test', 'Test:test');
     $group = $link->addGroup('group');
