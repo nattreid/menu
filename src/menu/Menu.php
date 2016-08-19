@@ -180,7 +180,7 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
      */
     public function setBaseUrl($name, $link) {
         $this->baseUrl = new \stdClass;
-        $this->baseUrl->name = $this->translator !== NULL ? $this->translator->translate($name) : $name;
+        $this->baseUrl->name = $name;
         $this->baseUrl->link = $link;
     }
 
