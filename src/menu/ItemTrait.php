@@ -2,7 +2,8 @@
 
 namespace NAttreid\Menu;
 
-use Nette\Utils\Strings;
+use Nette\Utils\Strings,
+    NAttreid\Utils\Arrays;
 
 /**
  * 
@@ -23,8 +24,7 @@ trait ItemTrait {
     protected function addItem(Item $item, $position) {
         $item->setParent($this);
         if ($position !== NULL) {
-            $arr = [$item];
-            array_splice($this->items, $position, 0, $arr);
+            Arrays::slice($this->items, $position, $item);
         } else {
             $this->items[] = $item;
         }

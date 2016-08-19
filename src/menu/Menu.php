@@ -241,6 +241,7 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
 
         $template->view = $this->view;
         $template->args = $args;
+        ksort($this->items);
         $template->items = $this->items;
 
         $action = $this->presenter->getAction(TRUE);
