@@ -111,7 +111,7 @@ abstract class Item implements IParent {
     public function getName() {
         $translator = $this->getMenu()->getTranslator();
         if ($translator !== NULL) {
-            $message = 'menu.' . $this->getNamespace();
+            $message = $this->getNamespace();
             if (count($this->items) > 0) {
                 $message .= '.title';
             }

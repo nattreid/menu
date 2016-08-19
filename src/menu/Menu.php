@@ -49,31 +49,32 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
      */
     public function setMenu(array $menu) {
         $this->items = [];
-        $this->addMenu($menu);
+        foreach ($menu as $namespace => $modules) {
+            $this->addMenu($modules, $namespace);
+        }
     }
 
     /**
      * Prida do menu polozky
      * @param array $menu
-     * @param string $position
+     * @param string $namespace
+     * @param int $position
      */
-    public function addMenu(array $menu, $position = NULL) {
-        foreach ($menu as $namespace => $modules) {
-            foreach ($modules as $name => $item) {
-                if (!isset($item['link'])) {
-                    throw new \Nette\InvalidArgumentException('First level of Menu must have set link');
-                } else {
-                    $link = $this->addItem(new Link($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : []), $position);
-                    $link->setNamespace($namespace);
-                    $this->addLinkAddress($link);
+    public function addMenu(array $menu, $namespace = NULL, $position = NULL) {
+        foreach ($menu as $name => $item) {
+            if (!isset($item['link'])) {
+                throw new \Nette\InvalidArgumentException('First level of Menu must have set link');
+            } else {
+                $link = $this->addItem(new Link($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : []), $position);
+                $link->setNamespace($namespace);
+                $this->addLinkAddress($link);
 
-                    if (!empty($item['toBlank'])) {
-                        $link->toBlank();
-                    }
-
-                    unset($item['link'], $item['arguments'], $item['toBlank']);
-                    $this->addMenuItems($link, $item);
+                if (!empty($item['toBlank'])) {
+                    $link->toBlank();
                 }
+
+                unset($item['link'], $item['arguments'], $item['toBlank']);
+                $this->addMenuItems($link, $item);
             }
         }
     }
