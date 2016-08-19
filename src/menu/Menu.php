@@ -225,6 +225,7 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
     public function getBreadcrumb() {
         if ($this->breadcrumb === NULL) {
             $this->breadcrumb = new Breadcrumb;
+            $this->breadcrumb->setTranslator($this->translator);
             if ($this->baseUrl) {
                 $this->breadcrumb->addLink($this->baseUrl->name, $this->baseUrl->link);
             }
