@@ -108,14 +108,18 @@ abstract class Item implements IParent {
     }
 
     /** @return string */
-    public function getName() {
+    public function getName($translate = TRUE) {
         $translator = $this->getMenu()->getTranslator();
         if ($translator !== NULL) {
             $message = $this->getNamespace();
             if (count($this->items) > 0) {
                 $message .= '.title';
             }
-            return $translator->translate($message);
+            if ($translate) {
+                return $translator->translate($message);
+            } else {
+                return $message;
+            }
         } else {
             return $this->name;
         }

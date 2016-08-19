@@ -251,7 +251,8 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
             $links = $item->getActualLinks();
 
             foreach (array_reverse($links) as $link) {
-                $breadcrumb->addLink($link->name, $link->link, $link->arguments);
+                /* @var $link Link */
+                $breadcrumb->addLink($link->getName(FALSE), $link->link, $link->arguments);
             }
         }
 
