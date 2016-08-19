@@ -247,7 +247,9 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
             $item->setCurrent();
 
             $breadcrumb = $this->getBreadcrumb();
-            foreach ($item->getActualLinks() as $link) {
+            $links = $item->getActualLinks();
+
+            foreach (array_reverse($links) as $link) {
                 $breadcrumb->addLink($link->name, $link->link, $link->arguments);
             }
         }

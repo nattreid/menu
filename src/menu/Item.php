@@ -163,7 +163,7 @@ abstract class Item implements IParent {
     public abstract function isGroup();
 
     /**
-     * Linky (od aktualniho po vsechyn rodice)
+     * Linky (od aktualniho po vsechny rodice)
      * @return Link[]
      */
     public function getActualLinks() {
