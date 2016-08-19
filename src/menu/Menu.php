@@ -50,7 +50,9 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
     public function setMenu(array $menu) {
         $this->items = [];
         foreach ($menu as $namespace => $modules) {
-            $this->addMenu($modules, $namespace);
+            if (!empty($modules)) {
+                $this->addMenu($modules, $namespace);
+            }
         }
     }
 
