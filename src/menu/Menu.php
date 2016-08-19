@@ -200,7 +200,7 @@ class Menu extends \Nette\Application\UI\Control implements IParent {
      * @return boolean
      */
     public function isLinkAllowed($link) {
-        $this->prepareLink($link, TRUE);
+        $this->prepareLink($link);
         if (isset($this->links[$link])) {
             return $this->links[$link];
         } else {

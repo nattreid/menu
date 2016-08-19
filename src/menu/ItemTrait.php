@@ -35,15 +35,13 @@ trait ItemTrait {
      * Upravi link
      * @param string $link
      */
-    protected function prepareLink(&$link, $removeAction = FALSE) {
+    protected function prepareLink(&$link) {
         if (Strings::endsWith($link, ':default')) {
             $link = substr($link, 0, -7);
         }
-        if ($removeAction) {
-            $pos = strrpos($link, ':');
-            if ($pos !== count($link)) {
-                $link = substr($link, 0, $pos + 1);
-            }
+        $pos = strrpos($link, ':');
+        if ($pos !== count($link)) {
+            $link = substr($link, 0, $pos + 1);
         }
     }
 
