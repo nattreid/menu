@@ -2,8 +2,7 @@
 
 namespace NAttreid\Menu;
 
-use     Nette\Utils\Strings,
-    Nette\Localization\ITranslator;
+use Nette\Localization\ITranslator;
 
 /**
  * Drobeckova navigace
@@ -11,8 +10,6 @@ use     Nette\Utils\Strings,
  * @author Attreid <attreid@gmail.com>
  */
 class Breadcrumb extends \Nette\Application\UI\Control {
-
-
 
     /**
      * Text pred navigaci
@@ -40,8 +37,6 @@ class Breadcrumb extends \Nette\Application\UI\Control {
      * @var boolean
      */
     private $view = FALSE;
-
-
 
     /**
      * Nastavi translator
@@ -81,11 +76,11 @@ class Breadcrumb extends \Nette\Application\UI\Control {
      * @param array $arguments
      */
     public function addLink($name, $link = NULL, $arguments = []) {
-            $obj = new \stdClass;
-            $obj->name = $this->translator !== NULL ? $this->translator->translate($name) : $name;
-            $obj->link = $link;
-            $obj->arguments = $arguments;
-            $this->links[] = $obj;
+        $obj = new \stdClass;
+        $obj->name = $this->translator !== NULL ? $this->translator->translate($name) : $name;
+        $obj->link = $link;
+        $obj->arguments = $arguments;
+        $this->links[] = $obj;
     }
 
     public function render($args = NULL) {
