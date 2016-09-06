@@ -1,21 +1,23 @@
 {
-    "name": "menu",
-    "description": "Menu for Nette Framework",
-    "license": ["Unlicense"],
-    "authors": [
-        {
-            "name": "Attreid",
-            "email": "attreid@gmail.com"
-        }
-    ],
-    "main": [
-        "./assets/menu.js"
-    ],
-    "ignore": [
-        "/src",
-        "/composer.json"
-    ],
-    "dependencies": {
-        "jquery": "~1.12"
+  "name": "menu",
+  "description": "Menu for Nette Framework",
+  "license": [
+    "Unlicense"
+  ],
+  "authors": [
+    {
+      "name": "Attreid",
+      "email": "attreid@gmail.com"
     }
+  ],
+  "main": [
+    "./assets/menu.js"
+  ],
+  "ignore": [
+    "/src",
+    "/composer.json"
+  ],
+  "dependencies": {
+    "jquery": "~1.12"
+  }
 }

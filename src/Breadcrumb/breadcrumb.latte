@@ -2,16 +2,16 @@
     <ul>
         {ifset $title}
             <li class="breadcrumb-title">{$title}</li>
-            {/ifset}
-            {foreach $links as $link}
+        {/ifset}
+        {foreach $links as $link}
             <li>
                 <span n:if="!$iterator->isFirst()" n:ifset="$delimiter">{$delimiter}</span>
-                <a 
-                    {if $link->link !== NULL}
-                        href="{plink $link->link, (expand) $link->arguments}"
-                    {else}
-                        href="{plink this}"
-                    {/if}>{$link->name}
+                <a
+                        {if $link->link !== NULL}
+                    href="{plink $link->link, (expand) $link->arguments}"
+                        {else}
+                    href="{plink this}"
+                        {/if}>{$link->name}
                 </a>
             </li>
         {/foreach}
