@@ -139,7 +139,8 @@ class Menu extends Control implements IParent
 
 	/**
 	 * Prida link do seznamu podle linku
-	 * @param \NAttreid\Menu\Link $link
+	 * @internal
+	 * @param Link $link
 	 * @return Link
 	 * @throws InvalidStateException
 	 */
