@@ -104,7 +104,7 @@ abstract class Item implements IParent
 	{
 		/* @var $item Link */
 		$item = $this->addItem(new Link($name, $link, $arguments), $position);
-		return $this->getMenu()->addLinkAddress($item);
+		return $this->getMenu()->attachLink($item);
 	}
 
 	/**

@@ -78,7 +78,7 @@ class Menu extends Control implements IParent
 				/* @var $link Link */
 				$link = $this->addItem(new Link($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : []), $position);
 				$link->setNamespace($namespace);
-				$this->addLinkAddress($link);
+				$this->attachLink($link);
 
 				if (!empty($item['toBlank'])) {
 					$link->toBlank();
@@ -134,7 +134,7 @@ class Menu extends Control implements IParent
 	{
 		/* @var $item Link */
 		$item = $this->addItem(new Link($name, $link, $arguments), $position);
-		return $this->addLinkAddress($item);
+		return $this->attachLink($item);
 	}
 
 	/**
@@ -144,7 +144,7 @@ class Menu extends Control implements IParent
 	 * @return Link
 	 * @throws InvalidStateException
 	 */
-	public function addLinkAddress(Link $link)
+	public function attachLink(Link $link)
 	{
 		if (isset($this->links[$link->link])) {
 			throw new InvalidStateException("Link '{$link->link}' already exists in Menu.");
