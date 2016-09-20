@@ -65,7 +65,7 @@ abstract class Item implements IParent
 			$namespace = $this->parent->getNamespace() . '.' . $namespace;
 		}
 		return $namespace;
-	}/** @noinspection PhpInconsistentReturnPointsInspection */
+	}
 
 	/**
 	 * Vrati Menu
@@ -110,7 +110,6 @@ abstract class Item implements IParent
 	/**
 	 * Nastavi rodice
 	 * @param IParent $parent
-	 * @throws \Nette\InvalidArgumentException
 	 */
 	public function setParent(IParent $parent)
 	{
@@ -134,7 +133,7 @@ abstract class Item implements IParent
 		} else {
 			return $this->name;
 		}
-	}/** @noinspection PhpInconsistentReturnPointsInspection */
+	}
 
 	/**
 	 * Vrati link
