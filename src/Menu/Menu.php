@@ -2,8 +2,11 @@
 
 namespace NAttreid\Menu;
 
+use Nette\Application\UI\Control;
 use Nette\Http\Session;
 use Nette\Http\SessionSection;
+use Nette\InvalidArgumentException;
+use Nette\InvalidStateException;
 use Nette\Localization\ITranslator;
 use Nette\Security\User;
 
@@ -12,7 +15,7 @@ use Nette\Security\User;
  *
  * @author Attreid <attreid@gmail.com>
  */
-class Menu extends \Nette\Application\UI\Control implements IParent
+class Menu extends Control implements IParent
 {
 
 	use ItemTrait;
@@ -48,7 +51,7 @@ class Menu extends \Nette\Application\UI\Control implements IParent
 	/**
 	 * Nastavi Menu z pole (treba z config.neon)
 	 * @param array $menu
-	 * @throws \Nette\InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function setMenu(array $menu)
 	{
@@ -70,7 +73,7 @@ class Menu extends \Nette\Application\UI\Control implements IParent
 	{
 		foreach ($menu as $name => $item) {
 			if (!isset($item['link'])) {
-				throw new \Nette\InvalidArgumentException('First level of Menu must have set link');
+				throw new InvalidArgumentException('First level of Menu must have set link');
 			} else {
 				/* @var $link Link */
 				$link = $this->addItem(new Link($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : []), $position);
@@ -138,12 +141,12 @@ class Menu extends \Nette\Application\UI\Control implements IParent
 	 * Prida link do seznamu podle linku
 	 * @param \NAttreid\Menu\Link $link
 	 * @return Link
-	 * @throws \Nette\InvalidStateException
+	 * @throws InvalidStateException
 	 */
 	public function addLinkAddress(Link $link)
 	{
 		if (isset($this->links[$link->link])) {
-			throw new \Nette\InvalidStateException("Link '{$link->link}' already exists in Menu.");
+			throw new InvalidStateException("Link '{$link->link}' already exists in Menu.");
 		}
 		return $this->links[$link->link] = $link;
 	}
@@ -205,7 +208,8 @@ class Menu extends \Nette\Application\UI\Control implements IParent
 
 	/**
 	 * Autorizace
-	 * @return boolean
+	 * @param $resource
+	 * @return bool
 	 */
 	public function isAllowed($resource)
 	{

@@ -2,6 +2,7 @@
 
 namespace NAttreid\Menu;
 
+use Nette\SmartObject;
 use Nette\Utils\Strings;
 
 /**
@@ -19,7 +20,7 @@ use Nette\Utils\Strings;
 abstract class Item implements IParent
 {
 
-	use \Nette\SmartObject,
+	use SmartObject,
 		ItemTrait;
 
 	/** @var string */
@@ -64,7 +65,7 @@ abstract class Item implements IParent
 			$namespace = $this->parent->getNamespace() . '.' . $namespace;
 		}
 		return $namespace;
-	}
+	}/** @noinspection PhpInconsistentReturnPointsInspection */
 
 	/**
 	 * Vrati Menu
@@ -84,7 +85,7 @@ abstract class Item implements IParent
 	 * Prida skupinu
 	 * @param string $name
 	 * @param int $position
-	 * @return Group
+	 * @return Group|Item
 	 */
 	public function addGroup($name, $position = NULL)
 	{
@@ -101,6 +102,7 @@ abstract class Item implements IParent
 	 */
 	public function addLink($name, $link, array $arguments = [], $position = NULL)
 	{
+		/* @var $item Link */
 		$item = $this->addItem(new Link($name, $link, $arguments), $position);
 		return $this->getMenu()->addLinkAddress($item);
 	}
@@ -115,7 +117,10 @@ abstract class Item implements IParent
 		$this->parent = $parent;
 	}
 
-	/** @return string */
+	/**
+	 * @param bool $translate
+	 * @return string
+	 */
 	public function getName($translate = TRUE)
 	{
 		$translator = $this->getMenu()->getTranslator();
@@ -129,7 +134,7 @@ abstract class Item implements IParent
 		} else {
 			return $this->name;
 		}
-	}
+	}/** @noinspection PhpInconsistentReturnPointsInspection */
 
 	/**
 	 * Vrati link
@@ -155,25 +160,25 @@ abstract class Item implements IParent
 		}
 	}
 
-	/** @var boolean */
+	/** @return boolean */
 	public function isAllowed()
 	{
 		return $this->allowed;
 	}
 
-	/** @var Item[] */
+	/** @return Item[] */
 	public function getItems()
 	{
 		return $this->items;
 	}
 
-	/** @var boolean */
+	/** @return boolean */
 	public function isCurrent()
 	{
 		return $this->current;
 	}
 
-	/** @var boolean */
+	/** @return boolean */
 	public abstract function isGroup();
 
 	/**

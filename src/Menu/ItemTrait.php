@@ -24,6 +24,7 @@ trait ItemTrait
 	 */
 	protected function addItem(Item $item, $position)
 	{
+		/* @var $this IParent */
 		$item->setParent($this);
 		if ($position !== NULL) {
 			Arrays::slice($this->items, $position, $item);

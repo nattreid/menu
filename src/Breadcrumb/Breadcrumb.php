@@ -2,6 +2,7 @@
 
 namespace NAttreid\Menu;
 
+use Nette\Application\UI\Control;
 use Nette\Localization\ITranslator;
 
 /**
@@ -9,7 +10,7 @@ use Nette\Localization\ITranslator;
  *
  * @author Attreid <attreid@gmail.com>
  */
-class Breadcrumb extends \Nette\Application\UI\Control
+class Breadcrumb extends Control
 {
 
 	/**
