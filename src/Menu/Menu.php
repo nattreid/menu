@@ -41,6 +41,9 @@ class Menu extends Control implements IParent
 	/** @var Breadcrumb */
 	private $breadcrumb;
 
+	/** @var Link */
+	private $current;
+
 	public function __construct(User $user, Session $session)
 	{
 		parent::__construct();
@@ -253,6 +256,12 @@ class Menu extends Control implements IParent
 			if ($this->baseUrl) {
 				$this->breadcrumb->addLink($this->baseUrl->name, $this->baseUrl->link);
 			}
+			$links = $this->setCurrent()->getActualLinks();
+
+			foreach (array_reverse($links) as $link) {
+				/* @var $link Link */
+				$this->breadcrumb->addLink($link->getName(FALSE), $link->link, $link->arguments);
+			}
 		}
 		return $this->breadcrumb;
 	}
@@ -267,22 +276,25 @@ class Menu extends Control implements IParent
 		ksort($this->items);
 		$template->items = $this->items;
 
-		$action = $this->presenter->getAction(TRUE);
-		$this->prepareLink($action);
-		if (isset($this->links[$action])) {
-			$item = $this->links[$action];
-			$item->setCurrent();
-
-			$breadcrumb = $this->getBreadcrumb();
-			$links = $item->getActualLinks();
-
-			foreach (array_reverse($links) as $link) {
-				/* @var $link Link */
-				$breadcrumb->addLink($link->getName(FALSE), $link->link, $link->arguments);
-			}
-		}
+		$this->setCurrent();
 
 		$template->render();
+	}
+
+	/**
+	 * @return Link
+	 */
+	private function setCurrent()
+	{
+		if ($this->current === NULL) {
+			$action = $this->presenter->getAction(TRUE);
+			$this->prepareLink($action);
+			if (isset($this->links[$action])) {
+				$this->current = $this->links[$action];
+				$this->current->setCurrent();
+			}
+		}
+		return $this->current;
 	}
 
 }
