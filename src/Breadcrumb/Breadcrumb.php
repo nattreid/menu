@@ -83,8 +83,20 @@ class Breadcrumb extends Control
 	 */
 	public function addLink($name, $link = NULL, $arguments = [])
 	{
+		$name = $this->translator !== NULL ? $this->translator->translate($name) : $name;
+		$this->addLinkUntranslated($name, $link, $arguments);
+	}
+
+	/**
+	 * Prida polozku do navigace (bez prekladu jmena)
+	 * @param string $name
+	 * @param string $link
+	 * @param array $arguments
+	 */
+	public function addLinkUntranslated($name, $link = NULL, $arguments = [])
+	{
 		$obj = new \stdClass;
-		$obj->name = $this->translator !== NULL ? $this->translator->translate($name) : $name;
+		$obj->name = $name;
 		$obj->link = $link;
 		$obj->arguments = $arguments;
 		$this->links[] = $obj;
