@@ -256,11 +256,14 @@ class Menu extends Control implements IParent
 			if ($this->baseUrl) {
 				$this->breadcrumb->addLink($this->baseUrl->name, $this->baseUrl->link);
 			}
-			$links = $this->setCurrent()->getActualLinks();
 
-			foreach (array_reverse($links) as $link) {
-				/* @var $link Link */
-				$this->breadcrumb->addLink($link->getName(FALSE), $link->link, $link->arguments);
+			$current = $this->setCurrent();
+			if ($current !== NULL) {
+				$links = $current->getActualLinks();
+				foreach (array_reverse($links) as $link) {
+					/* @var $link Link */
+					$this->breadcrumb->addLink($link->getName(FALSE), $link->link, $link->arguments);
+				}
 			}
 		}
 		return $this->breadcrumb;
@@ -282,7 +285,7 @@ class Menu extends Control implements IParent
 	}
 
 	/**
-	 * @return Link
+	 * @return Link|NULL
 	 */
 	private function setCurrent()
 	{
