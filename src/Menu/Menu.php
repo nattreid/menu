@@ -252,8 +252,10 @@ class Menu extends Control implements IParent
 	{
 		if ($this->breadcrumb === NULL) {
 			$this->breadcrumb = new Breadcrumb;
-			$this->breadcrumb->setTranslator($this->translator);
-			if ($this->baseUrl) {
+			if ($this->translator !== NULL) {
+				$this->breadcrumb->setTranslator($this->translator);
+			}
+			if ($this->baseUrl !== NULL) {
 				$this->breadcrumb->addLink($this->baseUrl->name, $this->baseUrl->link);
 			}
 
