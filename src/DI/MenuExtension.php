@@ -2,8 +2,8 @@
 
 namespace NAttreid\Menu\DI;
 
-use NAttreid\Menu\IMenuFactory;
-use NAttreid\Menu\Menu;
+use NAttreid\Menu\Menu\IMenuFactory;
+use NAttreid\Menu\Menu\Menu;
 use Nette\DI\CompilerExtension;
 
 /**

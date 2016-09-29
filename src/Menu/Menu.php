@@ -1,7 +1,8 @@
 <?php
 
-namespace NAttreid\Menu;
+namespace NAttreid\Menu\Menu;
 
+use NAttreid\Menu\Breadcrumb\Breadcrumb;
 use Nette\Application\UI\Control;
 use Nette\Http\Session;
 use Nette\Http\SessionSection;

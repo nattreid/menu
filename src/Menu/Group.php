@@ -1,6 +1,6 @@
 <?php
 
-namespace NAttreid\Menu;
+namespace NAttreid\Menu\Menu;
 
 /**
  * Skupina linku

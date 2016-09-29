@@ -1,7 +1,8 @@
 <?php
 
-namespace NAttreid\Menu;
+namespace NAttreid\Menu\Menu;
 
+use Nette\InvalidStateException;
 use Nette\SmartObject;
 use Nette\Utils\Strings;
 
@@ -79,6 +80,7 @@ abstract class Item implements IParent
 		} elseif ($parent instanceof Item) {
 			return $parent->getMenu();
 		}
+		throw new InvalidStateException();
 	}
 
 	/**
@@ -157,6 +159,7 @@ abstract class Item implements IParent
 		} elseif ($parent instanceof Item) {
 			return $parent->createLink($link);
 		}
+		throw new InvalidStateException();
 	}
 
 	/** @return boolean */

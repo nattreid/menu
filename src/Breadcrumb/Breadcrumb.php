@@ -1,6 +1,6 @@
 <?php
 
-namespace NAttreid\Menu;
+namespace NAttreid\Menu\Breadcrumb;
 
 use Nette\Application\UI\Control;
 use Nette\Localization\ITranslator;
@@ -80,11 +80,12 @@ class Breadcrumb extends Control
 	 * @param string $name
 	 * @param string $link
 	 * @param array $arguments
+	 * @return Link
 	 */
 	public function addLink($name, $link = NULL, $arguments = [])
 	{
 		$name = $this->translator !== NULL ? $this->translator->translate($name) : $name;
-		$this->addLinkUntranslated($name, $link, $arguments);
+		return $this->addLinkUntranslated($name, $link, $arguments);
 	}
 
 	/**
@@ -92,14 +93,11 @@ class Breadcrumb extends Control
 	 * @param string $name
 	 * @param string $link
 	 * @param array $arguments
+	 * @return Link
 	 */
 	public function addLinkUntranslated($name, $link = NULL, $arguments = [])
 	{
-		$obj = new \stdClass;
-		$obj->name = $name;
-		$obj->link = $link;
-		$obj->arguments = $arguments;
-		$this->links[] = $obj;
+		return $this->links[] = new Link($name, $link, $arguments);
 	}
 
 	public function render($args = NULL)

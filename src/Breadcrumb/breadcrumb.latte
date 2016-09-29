@@ -6,13 +6,19 @@
         {foreach $links as $link}
             <li>
                 <span n:if="!$iterator->isFirst()" n:ifset="$delimiter">{$delimiter}</span>
-                <a
-                        {if $link->link !== NULL}
-                    href="{plink $link->link, (expand) $link->arguments}"
-                        {else}
-                    href="{plink this}"
-                        {/if}>{$link->name}
-                </a>
+                {if $link->icon !== NULL}
+                    <a
+                            n:class="fa,'fa-'.$link->icon"
+                            title="{$link->name}"
+                            {if $link->link !== NULL}href="{plink $link->link, (expand) $link->arguments}"
+                            {else}href="{plink this}"{/if}></a>
+                {else}
+                    <a
+                            {if $link->link !== NULL}href="{plink $link->link, (expand) $link->arguments}"
+                            {else}href="{plink this}"{/if}>
+                        {$link->name}
+                    </a>
+                {/if}
             </li>
         {/foreach}
     </ul>
