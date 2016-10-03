@@ -229,7 +229,7 @@ class Menu extends Control implements IParent
 	public function isLinkAllowed($link)
 	{
 		$this->prepareLink($link);
-		return isset($this->links[$link]);
+		return $this->links[$link]->allowed;
 	}
 
 	/**
