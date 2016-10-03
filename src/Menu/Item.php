@@ -31,10 +31,10 @@ abstract class Item implements IParent
 	private $parent;
 
 	/** @var boolean */
-	protected $allowed = FALSE;
+	protected $allowed = false;
 
 	/** @var boolean */
-	private $current = FALSE;
+	private $current = false;
 
 	/** @var string */
 	private $namespace;
@@ -59,7 +59,7 @@ abstract class Item implements IParent
 	 */
 	public function getNamespace()
 	{
-		$namespace = ($this->namespace !== NULL ? $this->namespace . '.' : '') . $this->name;
+		$namespace = ($this->namespace !== null ? $this->namespace . '.' : '') . $this->name;
 
 		$parent = $this->parent;
 		if ($parent instanceof Item) {
@@ -89,7 +89,7 @@ abstract class Item implements IParent
 	 * @param int $position
 	 * @return Group|Item
 	 */
-	public function addGroup($name, $position = NULL)
+	public function addGroup($name, $position = null)
 	{
 		return $this->addItem(new Group($name), $position);
 	}
@@ -102,7 +102,7 @@ abstract class Item implements IParent
 	 * @param int $position
 	 * @return Link
 	 */
-	public function addLink($name, $link, array $arguments = [], $position = NULL)
+	public function addLink($name, $link, array $arguments = [], $position = null)
 	{
 		/* @var $item Link */
 		$item = $this->addItem(new Link($name, $link, $arguments), $position);
@@ -122,10 +122,10 @@ abstract class Item implements IParent
 	 * @param bool $translate
 	 * @return string
 	 */
-	public function getName($translate = TRUE)
+	public function getName($translate = true)
 	{
 		$translator = $this->getMenu()->getTranslator();
-		if ($translator !== NULL) {
+		if ($translator !== null) {
 			$message = $this->getNamespace() . '.title';
 			if ($translate) {
 				return $translator->translate($message);
@@ -149,7 +149,7 @@ abstract class Item implements IParent
 		if ($this instanceof Link) {
 			$link = Strings::firstUpper($this->name) . ':' . $link;
 		}
-		if ($this->namespace !== NULL) {
+		if ($this->namespace !== null) {
 			$link = Strings::firstUpper($this->namespace) . ':' . $link;
 		}
 
@@ -206,7 +206,7 @@ abstract class Item implements IParent
 	 */
 	public function setCurrent()
 	{
-		$this->current = TRUE;
+		$this->current = true;
 		$parent = $this->parent;
 		if ($parent instanceof Item) {
 			$parent->setCurrent();

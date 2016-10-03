@@ -18,7 +18,7 @@ class Group extends Item
 	public function setParent(IParent $parent)
 	{
 		parent::setParent($parent);
-		$this->allowed = FALSE;
+		$this->allowed = false;
 	}
 
 	/** @return boolean */
@@ -26,7 +26,7 @@ class Group extends Item
 	{
 		$session = $this->getMenu()->getSessionSection();
 		if (!isset($session->groupHidden[$this->name])) {
-			return $session->groupHidden[$this->name] = FALSE;
+			return $session->groupHidden[$this->name] = false;
 		} else {
 			return $session->groupHidden[$this->name];
 		}
@@ -37,7 +37,7 @@ class Group extends Item
 	 */
 	public function isGroup()
 	{
-		return TRUE;
+		return true;
 	}
 
 }

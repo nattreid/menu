@@ -26,7 +26,7 @@ trait ItemTrait
 	{
 		/* @var $this IParent */
 		$item->setParent($this);
-		if ($position !== NULL) {
+		if ($position !== null) {
 			Arrays::slice($this->items, $position, $item);
 		} else {
 			$this->items[] = $item;

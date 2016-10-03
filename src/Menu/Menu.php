@@ -34,7 +34,7 @@ class Menu extends Control implements IParent
 	private $translator;
 
 	/** @var boolean */
-	private $view = TRUE;
+	private $view = true;
 
 	/** @var Link[] */
 	private $links = [];
@@ -73,7 +73,7 @@ class Menu extends Control implements IParent
 	 * @param string $namespace
 	 * @param int $position
 	 */
-	public function addMenu(array $menu, $namespace = NULL, $position = NULL)
+	public function addMenu(array $menu, $namespace = null, $position = null)
 	{
 		foreach ($menu as $name => $item) {
 			if (!isset($item['link'])) {
@@ -134,7 +134,7 @@ class Menu extends Control implements IParent
 	 * @param int $position
 	 * @return Link
 	 */
-	public function addLink($name, $link, array $arguments = [], $position = NULL)
+	public function addLink($name, $link, array $arguments = [], $position = null)
 	{
 		/* @var $item Link */
 		$item = $this->addItem(new Link($name, $link, $arguments), $position);
@@ -188,7 +188,7 @@ class Menu extends Control implements IParent
 	 */
 	public function disable()
 	{
-		$this->view = FALSE;
+		$this->view = false;
 	}
 
 	/**
@@ -196,7 +196,7 @@ class Menu extends Control implements IParent
 	 */
 	public function enable()
 	{
-		$this->view = TRUE;
+		$this->view = true;
 	}
 
 	/**
@@ -251,28 +251,28 @@ class Menu extends Control implements IParent
 	 */
 	public function getBreadcrumb()
 	{
-		if ($this->breadcrumb === NULL) {
+		if ($this->breadcrumb === null) {
 			$this->breadcrumb = new Breadcrumb;
-			if ($this->translator !== NULL) {
+			if ($this->translator !== null) {
 				$this->breadcrumb->setTranslator($this->translator);
 			}
-			if ($this->baseUrl !== NULL) {
+			if ($this->baseUrl !== null) {
 				$this->breadcrumb->addLink($this->baseUrl->name, $this->baseUrl->link);
 			}
 
 			$current = $this->setCurrent();
-			if ($current !== NULL) {
+			if ($current !== null) {
 				$links = $current->getActualLinks();
 				foreach (array_reverse($links) as $link) {
 					/* @var $link Link */
-					$this->breadcrumb->addLink($link->getName(FALSE), $link->link, $link->arguments);
+					$this->breadcrumb->addLink($link->getName(false), $link->link, $link->arguments);
 				}
 			}
 		}
 		return $this->breadcrumb;
 	}
 
-	public function render($args = NULL)
+	public function render($args = null)
 	{
 		$template = $this->template;
 		$template->setFile(__DIR__ . '/menu.latte');
@@ -288,12 +288,12 @@ class Menu extends Control implements IParent
 	}
 
 	/**
-	 * @return Link|NULL
+	 * @return Link|null
 	 */
 	private function setCurrent()
 	{
-		if ($this->current === NULL) {
-			$action = $this->presenter->getAction(TRUE);
+		if ($this->current === null) {
+			$action = $this->presenter->getAction(true);
 			$this->prepareLink($action);
 			if (isset($this->links[$action])) {
 				$this->current = $this->links[$action];

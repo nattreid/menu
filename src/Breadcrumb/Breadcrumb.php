@@ -38,7 +38,7 @@ class Breadcrumb extends Control
 	 * Zobrazi pokud obsahuje pouze jeden link
 	 * @var boolean
 	 */
-	private $view = FALSE;
+	private $view = false;
 
 	/**
 	 * Nastavi translator
@@ -55,7 +55,7 @@ class Breadcrumb extends Control
 	 */
 	public function setTitle($title)
 	{
-		$this->title = $this->translator !== NULL ? $this->translator->translate($title) : $title;
+		$this->title = $this->translator !== null ? $this->translator->translate($title) : $title;
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Breadcrumb extends Control
 	 */
 	public function always()
 	{
-		$this->view = TRUE;
+		$this->view = true;
 	}
 
 	/**
@@ -82,9 +82,9 @@ class Breadcrumb extends Control
 	 * @param array $arguments
 	 * @return Link
 	 */
-	public function addLink($name, $link = NULL, $arguments = [])
+	public function addLink($name, $link = null, $arguments = [])
 	{
-		$name = $this->translator !== NULL ? $this->translator->translate($name) : $name;
+		$name = $this->translator !== null ? $this->translator->translate($name) : $name;
 		return $this->addLinkUntranslated($name, $link, $arguments);
 	}
 
@@ -95,12 +95,12 @@ class Breadcrumb extends Control
 	 * @param array $arguments
 	 * @return Link
 	 */
-	public function addLinkUntranslated($name, $link = NULL, $arguments = [])
+	public function addLinkUntranslated($name, $link = null, $arguments = [])
 	{
 		return $this->links[] = new Link($name, $link, $arguments);
 	}
 
-	public function render($args = NULL)
+	public function render($args = null)
 	{
 		$template = $this->template;
 		$template->setFile(__DIR__ . '/breadcrumb.latte');

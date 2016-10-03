@@ -33,7 +33,7 @@ class Link extends Item
 	private $type;
 
 	/** @var boolean */
-	private $toBlank = FALSE;
+	private $toBlank = false;
 
 	public function __construct($name, $link, array $arguments = [])
 	{
@@ -103,7 +103,7 @@ class Link extends Item
 	 */
 	public function toBlank()
 	{
-		$this->toBlank = TRUE;
+		$this->toBlank = true;
 	}
 
 	/**
@@ -111,7 +111,7 @@ class Link extends Item
 	 */
 	public function isGroup()
 	{
-		return FALSE;
+		return false;
 	}
 
 }
