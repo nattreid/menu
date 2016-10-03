@@ -75,21 +75,20 @@ class Menu extends Control implements IParent
 	 */
 	public function addMenu(array $menu, $namespace = null, $position = null)
 	{
-		foreach ($menu as $name => $item) {
-			if (!isset($item['link'])) {
+		foreach ($menu as $name => $row) {
+			if (!isset($row['link'])) {
 				throw new InvalidArgumentException('First level of Menu must have set link');
 			} else {
-				/* @var $link Link */
-				$link = $this->addItem(new Link($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : []), $position);
+				$link = new Link($name, $row['link'], isset($row['arguments']) ? $row['arguments'] : []);
 				$link->setNamespace($namespace);
-				$this->attachLink($link);
-
-				if (!empty($item['toBlank'])) {
+				if (!empty($row['toBlank'])) {
 					$link->toBlank();
 				}
+				$this->addItem($link, $position);
+				$this->attachLink($link);
 
-				unset($item['link'], $item['arguments'], $item['toBlank']);
-				$this->addMenuItems($link, $item);
+				unset($row['link'], $row['arguments'], $row['toBlank']);
+				$this->addMenuItems($link, $row);
 			}
 		}
 	}
@@ -103,15 +102,15 @@ class Menu extends Control implements IParent
 	{
 		foreach ($menu as $name => $item) {
 			if (isset($item ['link'])) {
-				$obj = $parent->addLink($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : []);
+				$link = $parent->addLink($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : []);
 				if (!empty($item['toBlank'])) {
-					$obj->toBlank();
+					$link->toBlank();
 				}
 				unset($item['link'], $item['arguments'], $item['toBlank']);
 			} else {
-				$obj = $parent->addGroup($name);
+				$link = $parent->addGroup($name);
 			}
-			$this->addMenuItems($obj, $item);
+			$this->addMenuItems($link, $item);
 		}
 	}
 
