@@ -8,14 +8,14 @@
 
         var time = 300;
 
-        $('.Menu-container dt a').click(function () {
+        $('.menu-container dt a').click(function () {
             var parent = $(this).closest('dl');
 
             parent.children('dd').slideToggle(time, function () {
-                $(this).toggleClass('Menu-group-hidden');
+                $(this).toggleClass('menu-group-hidden');
             });
 
-            parent.children('dt').toggleClass('Menu-group-hidden');
+            parent.children('dt').toggleClass('menu-group-hidden');
         });
     });
 

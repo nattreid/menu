@@ -10,10 +10,10 @@
     {if $item->allowed}
         {if $item->group}
             <dl>
-                <dt n:class="$item->hidden ? 'Menu-group-hidden'"><a class="ajax"
+                <dt n:class="$item->hidden ? 'menu-group-hidden'"><a class="ajax"
                                                                      data-ajax-off="history" n:href="scrollGroup $item->name">{$item->name}</a>
                 </dt>
-                <dd n:if="$child->allowed" n:foreach="$item->items as $child" n:class="$item->hidden ? 'Menu-group-hidden'">
+                <dd n:if="$child->allowed" n:foreach="$item->items as $child" n:class="$item->hidden ? 'menu-group-hidden'">
                     {include item, item => $child}
                 </dd>
             </dl>

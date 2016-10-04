@@ -4,6 +4,7 @@ namespace NAttreid\Menu\Menu;
 
 use NAttreid\Menu\Breadcrumb\Breadcrumb;
 use Nette\Application\UI\Control;
+use Nette\Http\Request;
 use Nette\Http\Session;
 use Nette\Http\SessionSection;
 use Nette\InvalidArgumentException;
@@ -45,11 +46,15 @@ class Menu extends Control implements IParent
 	/** @var Link */
 	private $current;
 
-	public function __construct(User $user, Session $session)
+	/** @var Request */
+	private $request;
+
+	public function __construct(User $user, Session $session, Request $request)
 	{
 		parent::__construct();
 		$this->user = $user;
 		$this->session = $session;
+		$this->request = $request;
 	}
 
 	/**
@@ -237,11 +242,11 @@ class Menu extends Control implements IParent
 	 */
 	public function handleScrollGroup($name)
 	{
-		if ($this->presenter->isAjax()) {
+		if ($this->request->isAjax()) {
 			$session = $this->getSessionSection();
 			$session->groupHidden[$name] = !$session->groupHidden[$name];
 		}
-		$this->presenter->terminate();
+		exit;
 	}
 
 	/**
