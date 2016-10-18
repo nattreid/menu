@@ -48,7 +48,8 @@ class Link extends Item
 	public function setParent(IParent $parent)
 	{
 		parent::setParent($parent);
-		$this->allowed = $this->getMenu()->isAllowed($this->getNamespace());
+		$namespace = $this->getNamespace();
+		$this->allowed = $this->getMenu()->isAllowed($namespace, $namespace . '.title');
 
 		if ($parent instanceof Group) {
 			$parent->allowed |= $this->allowed;
