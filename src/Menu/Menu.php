@@ -218,11 +218,12 @@ class Menu extends Control implements IParent
 	/**
 	 * Autorizace
 	 * @param $resource
+	 * @param $name
 	 * @return bool
 	 */
-	public function isAllowed($resource)
+	public function isAllowed($resource, $name = null)
 	{
-		return $this->user->isAllowed($resource, 'view');
+		return $this->user->isAllowed($resource, 'view', $name);
 	}
 
 	/**
