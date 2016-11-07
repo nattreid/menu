@@ -13,7 +13,7 @@ menu:
                 link: 'Homepage:'                       # link na HP modulu
                 group:                                  # skupina
                     page:                               # presenter
-                        link: 'action'                  # link akci presenteru
+                        link: 'action'                  # link akci presenteru, nebo null pro default
                         arguments: ['name': 'value']    # argumenty
                         toBlank: TRUE                   # otevre do noveho okna
 ```

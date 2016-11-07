@@ -3,6 +3,7 @@
 namespace NAttreid\Menu\Menu;
 
 use NAttreid\Menu\Breadcrumb\Breadcrumb;
+use NAttreid\Security\User;
 use Nette\Application\UI\Control;
 use Nette\Http\Request;
 use Nette\Http\Session;
@@ -10,7 +11,6 @@ use Nette\Http\SessionSection;
 use Nette\InvalidArgumentException;
 use Nette\InvalidStateException;
 use Nette\Localization\ITranslator;
-use Nette\Security\User;
 
 /**
  * Menu
@@ -106,7 +106,8 @@ class Menu extends Control implements IParent
 	private function addMenuItems(Item $parent, array $menu)
 	{
 		foreach ($menu as $name => $item) {
-			if (isset($item ['link'])) {
+
+			if (array_key_exists('link', $item)) {
 				$link = $parent->addLink($name, $item['link'], isset($item['arguments']) ? $item['arguments'] : []);
 				if (!empty($item['toBlank'])) {
 					$link->toBlank();
