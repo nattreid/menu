@@ -156,7 +156,7 @@ class Menu extends Control implements IParent
 	public function attachLink(Link $link)
 	{
 		if (isset($this->links[$link->link])) {
-			throw new InvalidStateException("Link '{$link->link}' already exists in Menu.");
+			return $this->links[$link->link];
 		}
 		return $this->links[$link->link] = $link;
 	}
