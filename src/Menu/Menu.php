@@ -151,13 +151,9 @@ class Menu extends Control implements IParent
 	 * @internal
 	 * @param Link $link
 	 * @return Link
-	 * @throws InvalidStateException
 	 */
 	public function attachLink(Link $link)
 	{
-		if (isset($this->links[$link->link])) {
-			return $this->links[$link->link];
-		}
 		return $this->links[$link->link] = $link;
 	}
 
