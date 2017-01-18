@@ -8,7 +8,7 @@ extensions:
 
 menu:
     items:
-        module:                                         # hlavni modul (front, crm)
+        module:                                         # hlavni modul (front, cms)
             data:                                       # namespace modulu
                 link: 'Homepage:'                       # link na HP modulu
                 group:                                  # skupina
