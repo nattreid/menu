@@ -8,14 +8,19 @@ extensions:
 
 menu:
     items:
-        module:                                         # hlavni modul (front, cms)
-            data:                                       # namespace modulu
-                link: 'Homepage:'                       # link na HP modulu
-                group:                                  # skupina
-                    page:                               # presenter
-                        link: 'action'                  # link akci presenteru, nebo null pro default
-                        arguments: ['name': 'value']    # argumenty
-                        toBlank: TRUE                   # otevre do noveho okna
+        module:                                                 # hlavni modul (front, cms)
+            data:                                               # namespace modulu
+                link: 'Homepage:'                               # link na HP modulu
+                group:                                          # skupina
+                    page:                                       # presenter
+                        link: action                            # link akci presenteru, nebo null pro default
+                        arguments: {name: value}                # argumenty
+                        toBlank: TRUE                           # otevre do noveho okna
+                        count: 5                                # pocet za linkem
+                        # nebo
+                        count: @SomeClass::countUnapproved()    # pocet za linkem
+                        # nebo
+                        count: {5, info}                        # muze byt info, warning (info je default)
 ```
 
 nebo postačí pouze zaregistrovat továrnu
@@ -39,12 +44,6 @@ function createComponentMenu() {
 
     return $menu;
 }
-```
-
-Nastaveni počtu za položku v menu
-```php
-$menu = $this['menu'];
-$menu->setCount('nazev', 5, \NAttreid\Menu\Menu\Item::INFO);
 ```
 
 ## Drobečková navigace

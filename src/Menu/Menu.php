@@ -9,7 +9,6 @@ use Nette\Http\Request;
 use Nette\Http\Session;
 use Nette\Http\SessionSection;
 use Nette\InvalidArgumentException;
-use Nette\InvalidStateException;
 use Nette\Localization\ITranslator;
 
 /**
@@ -112,23 +111,15 @@ class Menu extends Control implements IParent
 				if (!empty($item['toBlank'])) {
 					$link->toBlank();
 				}
-				unset($item['link'], $item['arguments'], $item['toBlank']);
+				if (!empty($item['count'])) {
+					$this->setCount($link, $item['count']);
+				}
+				unset($item['link'], $item['arguments'], $item['toBlank'], $item['count']);
 			} else {
 				$link = $parent->addGroup($name);
 			}
 			$this->addMenuItems($link, $item);
 		}
-	}
-
-	/**
-	 * Nastavi pocet (cislo za text linku)
-	 * @param string $link
-	 * @param int $count
-	 * @param string $type
-	 */
-	public function setCount($link, $count, $type = Link::INFO)
-	{
-		$this->links[$link]->setCount($count, $type);
 	}
 
 	/**
@@ -305,6 +296,21 @@ class Menu extends Control implements IParent
 		return $this->current;
 	}
 
+	/**
+	 * Nastavi pocet (cislo za text linku)
+	 * @param Link $link
+	 * @param mixed $count
+	 */
+	private function setCount(Link $link, $count)
+	{
+		if (is_array($count)) {
+			$link->setCount($count[0], $count[1]);
+		} elseif (is_int($count)) {
+			$link->setCount($count);
+		} else {
+			throw new InvalidArgumentException("Wrong argument 'count'");
+		}
+	}
 }
 
 interface IMenuFactory

@@ -2,6 +2,8 @@
 
 namespace NAttreid\Menu\Menu;
 
+use Nette\InvalidArgumentException;
+
 /**
  * Polozka Menu
  *
@@ -94,6 +96,13 @@ class Link extends Item
 	public function setCount($count, $type = self::INFO)
 	{
 		if ($count > 0) {
+			switch ($type) {
+				default:
+					throw new InvalidArgumentException("Wrong argument 'type'");
+				case self::INFO:
+				case self::WARNING:
+					break;
+			}
 			$this->count = $count;
 			$this->type = $type;
 		}
