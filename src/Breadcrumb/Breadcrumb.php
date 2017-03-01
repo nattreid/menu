@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Menu\Breadcrumb;
 
 use Nette\Application\UI\Control;
@@ -21,7 +23,7 @@ class Breadcrumb extends Control
 
 	/**
 	 * Linky v navigaci
-	 * @var array
+	 * @var Link[]
 	 */
 	private $links = [];
 
@@ -36,7 +38,7 @@ class Breadcrumb extends Control
 
 	/**
 	 * Zobrazi pokud obsahuje pouze jeden link
-	 * @var boolean
+	 * @var bool
 	 */
 	private $view = false;
 
@@ -53,7 +55,7 @@ class Breadcrumb extends Control
 	 * Nastavi text pred navigaci
 	 * @param string $title
 	 */
-	public function setTitle($title)
+	public function setTitle(string $title)
 	{
 		$this->title = $this->translator !== null ? $this->translator->translate($title) : $title;
 	}
@@ -62,7 +64,7 @@ class Breadcrumb extends Control
 	 * Nastavi oddelovac
 	 * @param string $delimiter
 	 */
-	public function setDelimiter($delimiter)
+	public function setDelimiter(string $delimiter)
 	{
 		$this->delimiter = $delimiter;
 	}
@@ -82,7 +84,7 @@ class Breadcrumb extends Control
 	 * @param array $arguments
 	 * @return Link
 	 */
-	public function addLink($name, $link = null, $arguments = [])
+	public function addLink(string $name, string $link = null, array $arguments = []): Link
 	{
 		$name = $this->translator !== null ? $this->translator->translate($name) : $name;
 		return $this->addLinkUntranslated($name, $link, $arguments);
@@ -95,7 +97,7 @@ class Breadcrumb extends Control
 	 * @param array $arguments
 	 * @return Link
 	 */
-	public function addLinkUntranslated($name, $link = null, $arguments = [])
+	public function addLinkUntranslated(string $name, string $link = null, array $arguments = []): Link
 	{
 		return $this->links[] = new Link($name, $link, $arguments);
 	}

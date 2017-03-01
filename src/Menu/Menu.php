@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Menu\Menu;
 
 use NAttreid\Menu\Breadcrumb\Breadcrumb;
@@ -33,7 +35,7 @@ class Menu extends Control implements IParent
 	/** @var ITranslator */
 	private $translator;
 
-	/** @var boolean */
+	/** @var bool */
 	private $view = true;
 
 	/** @var Link[] */
@@ -77,7 +79,7 @@ class Menu extends Control implements IParent
 	 * @param string $namespace
 	 * @param int $position
 	 */
-	public function addMenu(array $menu, $namespace = null, $position = null)
+	public function addMenu(array $menu, string $namespace = null, int $position = null)
 	{
 		foreach ($menu as $name => $row) {
 			if (!isset($row['link'])) {
@@ -130,7 +132,7 @@ class Menu extends Control implements IParent
 	 * @param int $position
 	 * @return Link
 	 */
-	public function addLink($name, $link, array $arguments = [], $position = null)
+	public function addLink(string $name, string $link, array $arguments = [], $position = null): Link
 	{
 		/* @var $item Link */
 		$item = $this->addItem(new Link($name, $link, $arguments), $position);
@@ -143,7 +145,7 @@ class Menu extends Control implements IParent
 	 * @param Link $link
 	 * @return Link
 	 */
-	public function attachLink(Link $link)
+	public function attachLink(Link $link): Link
 	{
 		return $this->links[$link->link] = $link;
 	}
@@ -161,7 +163,7 @@ class Menu extends Control implements IParent
 	 * Vrati translator
 	 * @return ITranslator
 	 */
-	public function getTranslator()
+	public function getTranslator(): ITranslator
 	{
 		return $this->translator;
 	}
@@ -170,7 +172,7 @@ class Menu extends Control implements IParent
 	 * Vrati session
 	 * @return SessionSection
 	 */
-	public function getSessionSection()
+	public function getSessionSection(): SessionSection
 	{
 		return $this->session->getSection('nattreid/Menu/' . $this->name);
 	}
@@ -196,7 +198,7 @@ class Menu extends Control implements IParent
 	 * @param string $name
 	 * @param string $link
 	 */
-	public function setBaseUrl($name, $link)
+	public function setBaseUrl(string $name, string $link)
 	{
 		$this->baseUrl = new \stdClass;
 		$this->baseUrl->name = $name;
@@ -205,11 +207,11 @@ class Menu extends Control implements IParent
 
 	/**
 	 * Autorizace
-	 * @param $resource
-	 * @param $name
+	 * @param string $resource
+	 * @param string $name
 	 * @return bool
 	 */
-	public function isAllowed($resource, $name = null)
+	public function isAllowed(string $resource, string $name = null): bool
 	{
 		return $this->user->isAllowed($resource, 'view', $name);
 	}
@@ -217,9 +219,9 @@ class Menu extends Control implements IParent
 	/**
 	 * Je aktualni stranka povolena
 	 * @param string $link
-	 * @return boolean
+	 * @return bool
 	 */
-	public function isLinkAllowed($link)
+	public function isLinkAllowed(string $link): bool
 	{
 		$this->prepareLink($link);
 		return $this->links[$link]->allowed;
@@ -229,7 +231,7 @@ class Menu extends Control implements IParent
 	 * Toggler scrolling
 	 * @param string $name
 	 */
-	public function handleScrollGroup($name)
+	public function handleScrollGroup(string $name)
 	{
 		if ($this->request->isAjax()) {
 			$session = $this->getSessionSection();
@@ -242,7 +244,7 @@ class Menu extends Control implements IParent
 	 * Vrati drobeckovou navidaci
 	 * @return Breadcrumb
 	 */
-	public function getBreadcrumb()
+	public function getBreadcrumb(): Breadcrumb
 	{
 		if ($this->breadcrumb === null) {
 			$this->breadcrumb = new Breadcrumb;
@@ -315,7 +317,5 @@ class Menu extends Control implements IParent
 
 interface IMenuFactory
 {
-
-	/** @return Menu */
-	public function create();
+	public function create(): Menu;
 }

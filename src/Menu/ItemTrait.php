@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Menu\Menu;
 
 use NAttreid\Utils\Arrays;
@@ -22,7 +24,7 @@ trait ItemTrait
 	 * @param int $position
 	 * @return Item
 	 */
-	protected function addItem(Item $item, $position)
+	protected function addItem(Item $item, int $position = null): Item
 	{
 		/* @var $this IParent */
 		$item->setParent($this);
@@ -38,7 +40,7 @@ trait ItemTrait
 	 * Upravi link
 	 * @param string $link
 	 */
-	protected function prepareLink(&$link)
+	protected function prepareLink(string &$link = null)
 	{
 		if (Strings::endsWith($link, ':default')) {
 			$link = substr($link, 0, -7);

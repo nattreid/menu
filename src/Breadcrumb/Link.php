@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Menu\Breadcrumb;
 
 use Nette\SmartObject;
@@ -30,7 +32,7 @@ class Link
 	/** @var string */
 	private $icon;
 
-	public function __construct($name, $link, array $arguments = [])
+	public function __construct(string $name, string $link, array $arguments = [])
 	{
 		$this->name = $name;
 		$this->link = $link;
@@ -40,7 +42,7 @@ class Link
 	/**
 	 * @return string
 	 */
-	public function getLink()
+	protected function getLink(): string
 	{
 		return $this->link;
 	}
@@ -48,7 +50,7 @@ class Link
 	/**
 	 * @return string
 	 */
-	public function getArguments()
+	protected function getArguments(): array
 	{
 		return $this->arguments;
 	}
@@ -56,7 +58,7 @@ class Link
 	/**
 	 * @return string
 	 */
-	public function getName()
+	protected function getName(): String
 	{
 		return $this->name;
 	}
@@ -64,7 +66,7 @@ class Link
 	/**
 	 * @return string
 	 */
-	public function getIcon()
+	protected function getIcon(): string
 	{
 		return $this->icon;
 	}
@@ -73,7 +75,7 @@ class Link
 	 * @param string $icon
 	 * @return self
 	 */
-	public function setIcon($icon)
+	protected function setIcon(string $icon): self
 	{
 		$this->icon = $icon;
 		return $this;

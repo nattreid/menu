@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Menu\Menu;
 
 use Nette\InvalidStateException;
@@ -10,9 +12,9 @@ use Nette\Utils\Strings;
  * Polozka Menu
  *
  * @property-read string $name
- * @property boolean $allowed
- * @property-read boolean $current
- * @property-read boolean $group
+ * @property bool $allowed
+ * @property-read bool $current
+ * @property-read bool $group
  * @property-read Item $parent
  * @property-read Item[] $items
  *
@@ -30,16 +32,16 @@ abstract class Item implements IParent
 	/** @var IParent */
 	private $parent;
 
-	/** @var boolean */
+	/** @var bool */
 	protected $allowed = false;
 
-	/** @var boolean */
+	/** @var bool */
 	private $current = false;
 
 	/** @var string */
 	private $namespace;
 
-	public function __construct($name)
+	public function __construct(string $name)
 	{
 		$this->name = $name;
 	}
@@ -48,7 +50,7 @@ abstract class Item implements IParent
 	 * Nastavi namespace
 	 * @param string $namespace
 	 */
-	public function setNamespace($namespace)
+	public function setNamespace(string $namespace)
 	{
 		$this->namespace = $namespace;
 	}
@@ -57,7 +59,7 @@ abstract class Item implements IParent
 	 * Vrati namespace
 	 * @return string
 	 */
-	public function getNamespace()
+	public function getNamespace(): string
 	{
 		$namespace = ($this->namespace !== null ? $this->namespace . '.' : '') . $this->name;
 
@@ -72,7 +74,7 @@ abstract class Item implements IParent
 	 * Vrati Menu
 	 * @return Menu
 	 */
-	protected function getMenu()
+	protected function getMenu(): Menu
 	{
 		$parent = $this->parent;
 		if ($parent instanceof Menu) {
@@ -89,7 +91,7 @@ abstract class Item implements IParent
 	 * @param int $position
 	 * @return Group|Item
 	 */
-	public function addGroup($name, $position = null)
+	public function addGroup(string $name, int $position = null): Item
 	{
 		return $this->addItem(new Group($name), $position);
 	}
@@ -102,7 +104,7 @@ abstract class Item implements IParent
 	 * @param int $position
 	 * @return Link
 	 */
-	public function addLink($name, $link, array $arguments = [], $position = null)
+	public function addLink(string $name, string $link, array $arguments = [], int $position = null): Link
 	{
 		/* @var $item Link */
 		$item = $this->addItem(new Link($name, $link, $arguments), $position);
@@ -122,7 +124,7 @@ abstract class Item implements IParent
 	 * @param bool $translate
 	 * @return string
 	 */
-	public function getName($translate = true)
+	protected function getName(bool $translate = true): string
 	{
 		$translator = $this->getMenu()->getTranslator();
 		if ($translator !== null) {
@@ -142,7 +144,7 @@ abstract class Item implements IParent
 	 * @param string $link
 	 * @return string
 	 */
-	protected function createLink($link)
+	protected function createLink(string $link): string
 	{
 		$this->prepareLink($link);
 
@@ -162,32 +164,32 @@ abstract class Item implements IParent
 		throw new InvalidStateException();
 	}
 
-	/** @return boolean */
-	public function isAllowed()
+	/** @return bool */
+	protected function isAllowed(): bool
 	{
 		return $this->allowed;
 	}
 
 	/** @return Item[] */
-	public function getItems()
+	public function getItems(): array
 	{
 		return $this->items;
 	}
 
-	/** @return boolean */
-	public function isCurrent()
+	/** @return bool */
+	public function isCurrent(): bool
 	{
 		return $this->current;
 	}
 
-	/** @return boolean */
-	public abstract function isGroup();
+	/** @return bool */
+	public abstract function isGroup(): bool;
 
 	/**
 	 * Linky (od aktualniho po vsechny rodice)
 	 * @return Link[]
 	 */
-	public function getActualLinks()
+	public function getActualLinks(): array
 	{
 		$arr = [];
 		if ($this instanceof Link) {

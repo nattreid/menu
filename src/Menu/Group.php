@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Menu\Menu;
 
 /**
  * Skupina linku
  *
- * @property-read boolean $hidden
+ * @property-read bool $hidden
  *
  * @author Attreid <attreid@gmail.com>
  */
@@ -21,8 +23,8 @@ class Group extends Item
 		$this->allowed = false;
 	}
 
-	/** @return boolean */
-	public function isHidden()
+	/** @return bool */
+	public function isHidden(): bool
 	{
 		$session = $this->getMenu()->getSessionSection();
 		if (!isset($session->groupHidden[$this->name])) {
@@ -35,7 +37,7 @@ class Group extends Item
 	/**
 	 * {@inheritdoc }
 	 */
-	public function isGroup()
+	public function isGroup(): bool
 	{
 		return true;
 	}

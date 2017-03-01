@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NAttreid\Menu\Menu;
 
 use Nette\InvalidArgumentException;
@@ -11,7 +13,7 @@ use Nette\InvalidArgumentException;
  * @property-read array $arguments
  * @property-read int $count
  * @property-read string $type
- * @property-read boolean $toBlank
+ * @property-read bool $toBlank
  *
  * @author Attreid <attreid@gmail.com>
  */
@@ -29,15 +31,15 @@ class Link extends Item
 	private $arguments;
 
 	/** @var int */
-	private $count;
+	private $count = 0;
 
 	/** @var string */
 	private $type;
 
-	/** @var boolean */
+	/** @var bool */
 	private $toBlank = false;
 
-	public function __construct($name, $link, array $arguments = [])
+	public function __construct(string $name, string $link, array $arguments = [])
 	{
 		parent::__construct($name);
 		$this->link = $link;
@@ -59,31 +61,31 @@ class Link extends Item
 	}
 
 	/** @return string */
-	public function getLink()
+	protected function getLink(): string
 	{
 		return $this->createLink($this->link);
 	}
 
 	/** @return int */
-	public function getCount()
+	protected function getCount(): int
 	{
 		return $this->count;
 	}
 
 	/** @return string */
-	public function getType()
+	public function getType(): string
 	{
 		return $this->type;
 	}
 
-	/** @return boolean */
-	public function getToBlank()
+	/** @return bool */
+	public function getToBlank(): bool
 	{
 		return $this->toBlank;
 	}
 
 	/** @return array */
-	public function getArguments()
+	public function getArguments(): array
 	{
 		return $this->arguments;
 	}
@@ -93,7 +95,7 @@ class Link extends Item
 	 * @param int $count
 	 * @param string $type
 	 */
-	public function setCount($count, $type = self::INFO)
+	public function setCount(int $count, string $type = self::INFO)
 	{
 		if ($count > 0) {
 			switch ($type) {
@@ -119,7 +121,7 @@ class Link extends Item
 	/**
 	 * {@inheritdoc }
 	 */
-	public function isGroup()
+	public function isGroup(): bool
 	{
 		return false;
 	}
