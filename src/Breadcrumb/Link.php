@@ -75,7 +75,7 @@ class Link
 	 * @param string $icon
 	 * @return self
 	 */
-	protected function setIcon(string $icon): self
+	public function setIcon(string $icon): self
 	{
 		$this->icon = $icon;
 		return $this;
