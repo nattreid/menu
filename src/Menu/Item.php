@@ -50,7 +50,7 @@ abstract class Item implements IParent
 	 * Nastavi namespace
 	 * @param string $namespace
 	 */
-	public function setNamespace(string $namespace)
+	public function setNamespace(string $namespace = null)
 	{
 		$this->namespace = $namespace;
 	}
@@ -104,7 +104,7 @@ abstract class Item implements IParent
 	 * @param int $position
 	 * @return Link
 	 */
-	public function addLink(string $name, string $link, array $arguments = [], int $position = null): Link
+	public function addLink(string $name, string $link = null, array $arguments = [], int $position = null): Link
 	{
 		/* @var $item Link */
 		$item = $this->addItem(new Link($name, $link, $arguments), $position);
@@ -124,7 +124,7 @@ abstract class Item implements IParent
 	 * @param bool $translate
 	 * @return string
 	 */
-	protected function getName(bool $translate = true): string
+	public function getName(bool $translate = true): string
 	{
 		$translator = $this->getMenu()->getTranslator();
 		if ($translator !== null) {
@@ -144,7 +144,7 @@ abstract class Item implements IParent
 	 * @param string $link
 	 * @return string
 	 */
-	protected function createLink(string $link): string
+	protected function createLink(string $link = null): string
 	{
 		$this->prepareLink($link);
 

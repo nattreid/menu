@@ -32,7 +32,7 @@ class Link
 	/** @var string */
 	private $icon;
 
-	public function __construct(string $name, string $link, array $arguments = [])
+	public function __construct(string $name, string $link = null, array $arguments = [])
 	{
 		$this->name = $name;
 		$this->link = $link;
@@ -40,9 +40,9 @@ class Link
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	protected function getLink(): string
+	protected function getLink()
 	{
 		return $this->link;
 	}
@@ -64,9 +64,9 @@ class Link
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	protected function getIcon(): string
+	protected function getIcon()
 	{
 		return $this->icon;
 	}

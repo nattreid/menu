@@ -42,12 +42,14 @@ trait ItemTrait
 	 */
 	protected function prepareLink(string &$link = null)
 	{
-		if (Strings::endsWith($link, ':default')) {
-			$link = substr($link, 0, -7);
-		}
-		$pos = strrpos($link, ':');
-		if ($pos !== count($link)) {
-			$link = substr($link, 0, $pos + 1);
+		if ($link !== null) {
+			if (Strings::endsWith($link, ':default')) {
+				$link = substr($link, 0, -7);
+			}
+			$pos = strrpos($link, ':');
+			if ($pos !== count($link)) {
+				$link = substr($link, 0, $pos + 1);
+			}
 		}
 	}
 

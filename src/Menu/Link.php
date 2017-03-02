@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace NAttreid\Menu\Menu;
 
 use Nette\InvalidArgumentException;
+use Tracy\Debugger;
 
 /**
  * Polozka Menu
@@ -39,7 +40,7 @@ class Link extends Item
 	/** @var bool */
 	private $toBlank = false;
 
-	public function __construct(string $name, string $link, array $arguments = [])
+	public function __construct(string $name, string $link = null, array $arguments = [])
 	{
 		parent::__construct($name);
 		$this->link = $link;
@@ -56,7 +57,7 @@ class Link extends Item
 		$this->allowed = $this->getMenu()->isAllowed($namespace, $namespace . '.title');
 
 		if ($parent instanceof Group) {
-			$parent->allowed |= $this->allowed;
+			$parent->allowed = $this->allowed || $parent->allowed;
 		}
 	}
 
@@ -72,8 +73,8 @@ class Link extends Item
 		return $this->count;
 	}
 
-	/** @return string */
-	public function getType(): string
+	/** @return string|null */
+	public function getType()
 	{
 		return $this->type;
 	}
