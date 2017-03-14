@@ -22,7 +22,8 @@
     "nette/application": "~2.4",
     "nette/di": "~2.4",
     "nattreid/utils": "~1.0",
-    "nattreid/security": "~1.0"
+    "nattreid/security": "~1.0",
+    "nattreid/breadcrumbs": "dev-master"
   },
   "require-dev": {
     "nette/tester": "~1.7",

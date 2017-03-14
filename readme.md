@@ -4,7 +4,7 @@
 Pokud chcete využít nastavení menu přes **config.neon**
 ```neon
 extensions:
-    - NAttreid\Menu\DI\MenuExtension
+    menu: NAttreid\Menu\DI\MenuExtension
 
 menu:
     items:
@@ -51,15 +51,5 @@ function createComponentMenu() {
 protected function createComponentBreadcrumb() {
     $breadcrumb = $this['menu']->getBreadcrumb();
     return $breadcrumb;
-}
-```
-
-Nebo samostatně
-```php
-
-protected function createComponentBreadcrumbs() {
-    $control = new Breadcrumb;
-    $control->addLink('name', 'Link:action');
-    return $control;
 }
 ```

@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace NAttreid\Menu\Menu;
 
 use Nette\InvalidArgumentException;
-use Tracy\Debugger;
 
 /**
  * Polozka Menu

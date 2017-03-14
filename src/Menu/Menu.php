@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace NAttreid\Menu\Menu;
 
-use NAttreid\Menu\Breadcrumb\Breadcrumb;
+use NAttreid\Breadcrumbs\Breadcrumb;
 use NAttreid\Security\User;
 use Nette\Application\UI\Control;
 use Nette\Http\Request;
@@ -247,10 +247,8 @@ class Menu extends Control implements IParent
 	public function getBreadcrumb(): Breadcrumb
 	{
 		if ($this->breadcrumb === null) {
-			$this->breadcrumb = new Breadcrumb;
-			if ($this->translator !== null) {
-				$this->breadcrumb->setTranslator($this->translator);
-			}
+			$this->breadcrumb = new Breadcrumb($this->translator);
+
 			if ($this->baseUrl !== null) {
 				$this->breadcrumb->addLink($this->baseUrl->name, $this->baseUrl->link);
 			}
