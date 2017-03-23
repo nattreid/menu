@@ -1,8 +1,8 @@
 {
-  "name": "menu",
+  "name": "nattreid-menu",
   "description": "Menu for Nette Framework",
   "license": [
-    "Unlicense"
+    "MIT"
   ],
   "authors": [
     {

@@ -1,13 +1,13 @@
 {
-  "name": "menu",
+  "name": "nattreid-menu",
   "description": "Menu for Nette Framework",
   "main": "gulpfile.js",
   "repository": {
     "type": "git",
-    "url": "git@git.newtravel.cz:nattreid/menu.git"
+    "url": "git@github.com:nattreid/menu.git"
   },
   "author": "Attreid",
-  "license": "Unlicense",
+  "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
