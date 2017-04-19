@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace NAttreid\Menu\Menu;
 
@@ -17,7 +17,7 @@ class Group extends Item
 	/**
 	 * {@inheritdoc }
 	 */
-	public function setParent(IParent $parent)
+	public function setParent(IParent $parent): void
 	{
 		parent::setParent($parent);
 		$this->allowed = false;

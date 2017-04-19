@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace NAttreid\Menu\Menu;
 
@@ -63,7 +63,7 @@ class Menu extends Control implements IParent
 	 * @param array $menu
 	 * @throws InvalidArgumentException
 	 */
-	public function setMenu(array $menu)
+	public function setMenu(array $menu): void
 	{
 		$this->items = [];
 		foreach ($menu as $namespace => $modules) {
@@ -79,7 +79,7 @@ class Menu extends Control implements IParent
 	 * @param string $namespace
 	 * @param int $position
 	 */
-	public function addMenu(array $menu, string $namespace = null, int $position = null)
+	public function addMenu(array $menu, string $namespace = null, int $position = null): void
 	{
 		foreach ($menu as $name => $row) {
 			if (!isset($row['link'])) {
@@ -104,7 +104,7 @@ class Menu extends Control implements IParent
 	 * @param Item $parent
 	 * @param array $menu
 	 */
-	private function addMenuItems(Item $parent, array $menu)
+	private function addMenuItems(Item $parent, array $menu): void
 	{
 		foreach ($menu as $name => $item) {
 
@@ -154,7 +154,7 @@ class Menu extends Control implements IParent
 	 * Nastavi translator
 	 * @param ITranslator $translator
 	 */
-	public function setTranslator(ITranslator $translator)
+	public function setTranslator(?ITranslator $translator): void
 	{
 		$this->translator = $translator;
 	}
@@ -180,7 +180,7 @@ class Menu extends Control implements IParent
 	/**
 	 * Vypne zobrazeni
 	 */
-	public function disable()
+	public function disable(): void
 	{
 		$this->view = false;
 	}
@@ -188,7 +188,7 @@ class Menu extends Control implements IParent
 	/**
 	 * Zapne zobrazeni (vychozi stav)
 	 */
-	public function enable()
+	public function enable(): void
 	{
 		$this->view = true;
 	}
@@ -198,7 +198,7 @@ class Menu extends Control implements IParent
 	 * @param string $name
 	 * @param string $link
 	 */
-	public function setBaseUrl(string $name, string $link)
+	public function setBaseUrl(string $name, string $link): void
 	{
 		$this->baseUrl = new \stdClass;
 		$this->baseUrl->name = $name;
@@ -231,7 +231,7 @@ class Menu extends Control implements IParent
 	 * Toggler scrolling
 	 * @param string $name
 	 */
-	public function handleScrollGroup(string $name)
+	public function handleScrollGroup(string $name): void
 	{
 		if ($this->request->isAjax()) {
 			$session = $this->getSessionSection();
@@ -265,7 +265,7 @@ class Menu extends Control implements IParent
 		return $this->breadcrumb;
 	}
 
-	public function render($args = null)
+	public function render(array $args = []): void
 	{
 		$template = $this->template;
 		$template->setFile(__DIR__ . '/menu.latte');
@@ -283,7 +283,7 @@ class Menu extends Control implements IParent
 	/**
 	 * @return Link|null
 	 */
-	private function setCurrent()
+	private function setCurrent(): ?Link
 	{
 		if ($this->current === null) {
 			$action = $this->presenter->getAction(true);
@@ -301,7 +301,7 @@ class Menu extends Control implements IParent
 	 * @param Link $link
 	 * @param mixed $count
 	 */
-	private function setCount(Link $link, $count)
+	private function setCount(Link $link, $count): void
 	{
 		if (is_array($count)) {
 			$link->setCount($count[0], $count[1]);

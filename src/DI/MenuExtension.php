@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace NAttreid\Menu\DI;
 
@@ -21,7 +21,7 @@ class MenuExtension extends CompilerExtension
 		'items' => []
 	];
 
-	public function loadConfiguration()
+	public function loadConfiguration(): void
 	{
 		$config = $this->validateConfig($this->defaults, $this->config);
 

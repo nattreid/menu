@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace NAttreid\Menu\Menu;
 
@@ -40,7 +40,7 @@ trait ItemTrait
 	 * Upravi link
 	 * @param string $link
 	 */
-	protected function prepareLink(string &$link = null)
+	protected function prepareLink(string &$link = null): void
 	{
 		if ($link !== null) {
 			if (Strings::endsWith($link, ':default')) {

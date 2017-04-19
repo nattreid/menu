@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace NAttreid\Menu\Menu;
 
@@ -49,7 +49,7 @@ class Link extends Item
 	/**
 	 * {@inheritdoc }
 	 */
-	public function setParent(IParent $parent)
+	public function setParent(IParent $parent): void
 	{
 		parent::setParent($parent);
 		$namespace = $this->getNamespace();
@@ -73,7 +73,7 @@ class Link extends Item
 	}
 
 	/** @return string|null */
-	public function getType()
+	public function getType(): ?string
 	{
 		return $this->type;
 	}
@@ -95,7 +95,7 @@ class Link extends Item
 	 * @param int $count
 	 * @param string $type
 	 */
-	public function setCount(int $count, string $type = self::INFO)
+	public function setCount(int $count, string $type = self::INFO): void
 	{
 		if ($count > 0) {
 			switch ($type) {
@@ -113,7 +113,7 @@ class Link extends Item
 	/**
 	 * Nastavi link do noveho okna
 	 */
-	public function toBlank()
+	public function toBlank(): void
 	{
 		$this->toBlank = true;
 	}

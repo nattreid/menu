@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace NAttreid\Menu\Menu;
 
@@ -50,7 +50,7 @@ abstract class Item implements IParent
 	 * Nastavi namespace
 	 * @param string $namespace
 	 */
-	public function setNamespace(string $namespace = null)
+	public function setNamespace(string $namespace = null): void
 	{
 		$this->namespace = $namespace;
 	}
@@ -115,7 +115,7 @@ abstract class Item implements IParent
 	 * Nastavi rodice
 	 * @param IParent $parent
 	 */
-	public function setParent(IParent $parent)
+	public function setParent(IParent $parent): void
 	{
 		$this->parent = $parent;
 	}
@@ -206,7 +206,7 @@ abstract class Item implements IParent
 	/**
 	 * Nastavi jako aktivni i s rodici
 	 */
-	public function setCurrent()
+	public function setCurrent(): void
 	{
 		$this->current = true;
 		$parent = $this->parent;
