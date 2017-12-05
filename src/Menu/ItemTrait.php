@@ -47,7 +47,7 @@ trait ItemTrait
 				$link = substr($link, 0, -7);
 			}
 			$pos = strrpos($link, ':');
-			if ($pos !== count($link)) {
+			if ($pos !== strlen($link)) {
 				$link = substr($link, 0, $pos + 1);
 			}
 		}
