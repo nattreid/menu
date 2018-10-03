@@ -5,14 +5,14 @@ var gulp = require('gulp'),
 var path = './assets/';
 
 gulp.task('js', function () {
-    return gulp.src(path + 'Menu.js')
+    return gulp.src(path + 'menu.js')
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
         .pipe(gulp.dest(path));
 });
 
 gulp.task('watch', function () {
-    gulp.watch(path + 'Menu.js', ['js']);
+    gulp.watch(path + 'Menu.js', gulp.series('js'));
 });
 
-gulp.task('default', ['js', 'watch']); 
+gulp.task('default', gulp.series('js', 'watch'));
