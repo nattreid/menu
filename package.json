@@ -1,7 +1,7 @@
 {
  "name": "nattreid-menu",
  "description": "Menu for Nette Framework",
- "version": "2.5.2",
+ "version": "2.5.3",
  "main": "./assets/menu.js",
  "repository": {
   "type": "git",
@@ -10,11 +10,11 @@
  "author": "Attreid",
  "license": "MIT",
  "dependencies": {
-  "jquery": "~3"
+  "jquery": "~3.3"
  },
  "devDependencies": {
-  "gulp": "~4",
-  "gulp-rename": "~1",
-  "gulp-uglify": "~3"
+  "gulp": "~4.0",
+  "gulp-rename": "~1.4",
+  "gulp-uglify": "~3.0"
  }
 }
